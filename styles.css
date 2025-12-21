@@ -42,6 +42,11 @@ a{ color:inherit; text-decoration:none; }
   gap:18px;
   padding: 14px 0;
 }
+.logo{
+  height: 42px;
+  width: auto;
+  display: block;
+}
 
 .brand{
   display:flex;
