@@ -1,0 +1,64 @@
+<!doctype html>
+<html>
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Sign Up — BluePeak Digital</title>
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+  <div id="nav-slot"></div>
+
+  <main class="section">
+    <div class="container" style="max-width:520px;">
+      <h2 class="section-title">Create Account</h2>
+      <p class="section-lead">Sign up to request services and track progress.</p>
+
+      <form class="form" id="signupForm">
+        <label>Full Name
+          <input name="full_name" type="text" placeholder="Your name" required />
+        </label>
+
+        <label>Email
+          <input name="email" type="email" placeholder="you@email.com" required />
+        </label>
+
+        <label>Password
+          <input name="password" type="password" minlength="6" required />
+        </label>
+
+        <button class="btn btn-primary" type="submit">Create Account</button>
+        <p class="form-note">Already have an account?
+          <a href="login.html" style="color:var(--accent);font-weight:800;">Login</a>
+        </p>
+      </form>
+    </div>
+  </main>
+
+  <script src="config.js"></script>
+  <script src="app.js"></script>
+  <script>
+    document.getElementById("signupForm").addEventListener("submit", async (e) => {
+      e.preventDefault();
+
+      const API = window.BP_API_BASE;
+      const fd = new FormData(e.target);
+      const payload = Object.fromEntries(fd.entries());
+
+      const res = await fetch(`${API}/auth/signup`, {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(payload),
+      });
+
+      const data = await res.json().catch(() => ({}));
+      if (!res.ok || !data.ok) {
+        return alert(data.error || "Signup failed");
+      }
+
+      alert("Account created! Now login.");
+      window.location.href = "login.html";
+    });
+  </script>
+</body>
+</html>

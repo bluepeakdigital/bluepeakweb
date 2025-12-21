@@ -10,7 +10,11 @@ const adminRoutes = require("./routes/admin");
 const app = express();
 
 app.use(cors({
-  origin: "*",
+origin: [
+  "https://yourdomain.com",
+  "https://www.yourdomain.com",
+  "https://yourproject.pages.dev"
+],
   methods: ["GET", "POST", "PATCH", "PUT"],
   allowedHeaders: ["Content-Type", "Authorization"]
 }));

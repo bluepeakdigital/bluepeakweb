@@ -1,0 +1,63 @@
+<!doctype html>
+<html>
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Login — BluePeak Digital</title>
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+  <div id="nav-slot"></div>
+
+  <main class="section">
+    <div class="container" style="max-width:520px;">
+      <h2 class="section-title">Login</h2>
+      <p class="section-lead">Access your customer/admin dashboard.</p>
+
+      <form class="form" id="loginForm">
+        <label>Email
+          <input name="email" type="email" required />
+        </label>
+
+        <label>Password
+          <input name="password" type="password" required />
+        </label>
+
+        <button class="btn btn-primary" type="submit">Login</button>
+        <p class="form-note">No account?
+          <a href="signup.html" style="color:var(--accent);font-weight:800;">Sign up</a>
+        </p>
+      </form>
+    </div>
+  </main>
+
+  <script src="config.js"></script>
+  <script src="app.js"></script>
+  <script>
+    document.getElementById("loginForm").addEventListener("submit", async (e) => {
+      e.preventDefault();
+
+      const API = window.BP_API_BASE;
+      const fd = new FormData(e.target);
+      const payload = Object.fromEntries(fd.entries());
+
+      const res = await fetch(`${API}/auth/login`, {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(payload),
+      });
+
+      const data = await res.json().catch(() => ({}));
+      if (!res.ok || !data.ok) {
+        return alert(data.error || "Login failed");
+      }
+
+      localStorage.setItem("bp_token", data.token);
+
+      // redirect based on role
+      if (data.role === "admin") window.location.href = "admin.html";
+      else window.location.href = "portal.html";
+    });
+  </script>
+</body>
+</html>
