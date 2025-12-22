@@ -1,0 +1,57 @@
+<!doctype html>
+<html>
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Signing in…</title>
+</head>
+<body>
+  <p>Signing you in with Google…</p>
+
+  <script src="./config.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+
+  <script>
+    (async () => {
+      const API = (window.BP_API_BASE || "https://bluepeakweb.onrender.com").replace(/\/$/, "");
+      const SUPABASE_URL = window.SUPABASE_URL;
+      const SUPABASE_ANON_KEY = window.SUPABASE_ANON_KEY;
+
+      const supabase = window.supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
+
+      // Get session after OAuth redirect
+      const { data, error } = await supabase.auth.getSession();
+      if (error || !data.session) {
+        console.error(error);
+        alert("Google session not found. Try again.");
+        return window.location.href = "login.html";
+      }
+
+      const access_token = data.session.access_token;
+
+      // Send token to backend so backend can create/upsert your 'users' row + issue your JWT
+      const res = await fetch(`${API}/auth/google`, {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ access_token })
+      });
+
+      const text = await res.text();
+      let out = {};
+      try { out = JSON.parse(text); } catch {}
+
+      if (!res.ok || !out.ok) {
+        console.error(text);
+        alert(`Google login failed (${res.status}) - ${out.error || text}`);
+        return window.location.href = "login.html";
+      }
+
+      // Save your app JWT
+      localStorage.setItem("bp_token", out.token);
+      localStorage.setItem("bp_role", out.role);
+
+      window.location.href = (out.role === "admin") ? "admin.html" : "portal.html";
+    })();
+  </script>
+</body>
+</html>
