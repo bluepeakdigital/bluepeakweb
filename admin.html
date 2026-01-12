@@ -1,0 +1,156 @@
+<!doctype html>
+<html>
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Admin — BluePeak Digital</title>
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+  <div id="nav-slot"></div>
+
+  <main class="section">
+    <div class="container">
+      <div class="dash-head">
+        <div>
+          <h2 class="section-title">Admin Panel</h2>
+          <p class="section-lead">View customer requests and accounts.</p>
+        </div>
+        <button class="btn btn-ghost" id="logoutBtn" type="button">Logout</button>
+      </div>
+
+      <section class="panel">
+        <div class="panel-top">
+          <div>
+            <h3 class="panel-title">All Requests</h3>
+            <p class="panel-sub">Newest first.</p>
+          </div>
+          <button class="btn btn-ghost" id="refreshReq" type="button">Refresh</button>
+        </div>
+
+        <div id="reqEmpty" class="empty">Loading...</div>
+        <div id="reqList" class="req-list" style="display:none;"></div>
+      </section>
+
+      <section class="panel" style="margin-top:16px;">
+        <div class="panel-top">
+          <div>
+            <h3 class="panel-title">Users</h3>
+            <p class="panel-sub">No passwords shown (hashed passwords are never displayed).</p>
+          </div>
+          <button class="btn btn-ghost" id="refreshUsers" type="button">Refresh</button>
+        </div>
+
+        <div id="userEmpty" class="empty">Loading...</div>
+        <div id="userTableWrap" style="display:none; overflow:auto;">
+          <table class="admin-table">
+            <thead>
+              <tr>
+                <th>Name</th><th>Email</th><th>Phone</th><th>Company</th><th>Role</th><th>Created</th><th>Via</th>
+              </tr>
+            </thead>
+            <tbody id="userTbody"></tbody>
+          </table>
+        </div>
+      </section>
+    </div>
+  </main>
+
+  <script src="./config.js?v=9"></script>
+  <script src="./app.js"></script>
+  <script>
+    const API = (window.BP_API_BASE || "https://bluepeakweb.onrender.com").replace(/\/$/, "");
+    const token = localStorage.getItem("bp_token");
+    const role = localStorage.getItem("bp_role");
+
+    if (!token) window.location.href = "login.html";
+    if (role !== "admin") window.location.href = "portal.html";
+
+    document.getElementById("logoutBtn").onclick = () => {
+      localStorage.removeItem("bp_token");
+      localStorage.removeItem("bp_role");
+      localStorage.removeItem("bp_name");
+      window.location.href = "login.html";
+    };
+
+    function esc(s){ return String(s||"").replaceAll("&","&amp;").replaceAll("<","&lt;").replaceAll(">","&gt;"); }
+
+    async function loadAllRequests() {
+      const empty = document.getElementById("reqEmpty");
+      const list = document.getElementById("reqList");
+      empty.style.display = "block"; list.style.display="none";
+      empty.textContent = "Loading...";
+
+      const res = await fetch(`${API}/admin/requests`, {
+        headers: { Authorization: `Bearer ${token}` }
+      });
+
+      const data = await res.json().catch(()=>null);
+      if (!res.ok || !data?.ok) {
+        empty.textContent = `Failed to load (${res.status})`;
+        return;
+      }
+
+      const items = data.requests || [];
+      if (!items.length) { empty.textContent = "No requests."; return; }
+
+      empty.style.display="none"; list.style.display="grid";
+      list.innerHTML = items.map(r => `
+        <div class="req-card">
+          <div class="req-row">
+            <div class="req-title">${esc(r.title)}</div>
+            <span class="status status-${esc((r.status||"new").toLowerCase())}">${esc(r.status||"new")}</span>
+          </div>
+          <div class="req-meta">
+            <span>${esc(r.service_type)}</span><span>•</span>
+            <span>${esc(r.email || "")}</span><span>•</span>
+            <span>${new Date(r.created_at).toLocaleString()}</span>
+          </div>
+          <div class="req-details">${esc(r.details||"")}</div>
+        </div>
+      `).join("");
+    }
+
+    async function loadUsers() {
+      const empty = document.getElementById("userEmpty");
+      const wrap = document.getElementById("userTableWrap");
+      const tbody = document.getElementById("userTbody");
+      empty.style.display="block"; wrap.style.display="none";
+      empty.textContent="Loading...";
+
+      const res = await fetch(`${API}/admin/users`, {
+        headers: { Authorization: `Bearer ${token}` }
+      });
+
+      const data = await res.json().catch(()=>null);
+      if (!res.ok || !data?.ok) {
+        empty.textContent = `Failed to load users (${res.status})`;
+        return;
+      }
+
+      const users = data.users || [];
+      if (!users.length) { empty.textContent="No users."; return; }
+
+      empty.style.display="none";
+      wrap.style.display="block";
+      tbody.innerHTML = users.map(u => `
+        <tr>
+          <td>${esc(u.full_name)}</td>
+          <td>${esc(u.email)}</td>
+          <td>${esc(u.phone)}</td>
+          <td>${esc(u.company)}</td>
+          <td>${esc(u.role)}</td>
+          <td>${new Date(u.created_at).toLocaleString()}</td>
+          <td>${esc(u.created_via || "")}</td>
+        </tr>
+      `).join("");
+    }
+
+    document.getElementById("refreshReq").onclick = loadAllRequests;
+    document.getElementById("refreshUsers").onclick = loadUsers;
+
+    loadAllRequests();
+    loadUsers();
+  </script>
+</body>
+</html>

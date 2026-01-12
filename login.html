@@ -23,48 +23,68 @@
           <input name="password" type="password" required />
         </label>
 
-        <button class="btn btn-primary" type="submit">Login</button>
+        <button class="btn btn-primary" type="submit" id="loginBtn">Login</button>
 
-        <p class="form-note">No account?
+        <p class="form-note">
+          No account?
           <a href="signup.html" style="color:var(--accent);font-weight:800;">Sign up</a>
         </p>
       </form>
     </div>
   </main>
 
-  <!-- IMPORTANT: config must be in FRONTEND ROOT -->
-  <script src="./config.js"></script>
+  <!-- Load config + app helpers first -->
+  <script src="./config.js?v=11"></script>
+  <script src="./app.js?v=11"></script>
 
   <script>
-    // Force correct backend (no trailing slash)
-    const API = (window.BP_API_BASE || "https://bluepeakweb.onrender.com").replace(/\/$/, "");
-    console.log("API BASE =", API);
+    // If already logged in, go straight to dashboard
+    const existingToken = window.bpGetToken();
+    const existingRole  = window.bpGetRole();
+
+    if (existingToken && existingRole) {
+      window.location.href = (existingRole === "admin") ? "admin.html" : "portal.html";
+    }
 
     document.getElementById("loginForm").addEventListener("submit", async (e) => {
       e.preventDefault();
 
+      const btn = document.getElementById("loginBtn");
+      btn.disabled = true;
+      btn.textContent = "Logging in...";
+
       const fd = new FormData(e.target);
       const payload = Object.fromEntries(fd.entries());
+      payload.email = (payload.email || "").trim().toLowerCase();
 
-      const res = await fetch(`${API}/auth/login`, {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify(payload),
-      });
+      try {
+        const res = await fetch(`${window.BP_API}/auth/login`, {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify(payload),
+        });
 
-      const text = await res.text();
-      let data = {};
-      try { data = JSON.parse(text); } catch {}
+        const text = await res.text();
+        let data = {};
+        try { data = JSON.parse(text); } catch {}
 
-      if (!res.ok || !data.ok) {
-        alert(`Login failed (${res.status}) - ${data.error || text || "Unknown error"}`);
-        return;
+        if (!res.ok || !data.ok) {
+          alert(`Login failed (${res.status}) - ${data.error || text || "Unknown error"}`);
+          return;
+        }
+
+        // Save session
+        window.bpSetSession(data.token, data.role, data.name || "");
+
+        // Redirect
+        window.location.href = (data.role === "admin") ? "admin.html" : "portal.html";
+      } catch (err) {
+        console.error(err);
+        alert("Login failed - Network error (check API URL/CORS)");
+      } finally {
+        btn.disabled = false;
+        btn.textContent = "Login";
       }
-
-      localStorage.setItem("bp_token", data.token);
-      localStorage.setItem("bp_role", data.role);
-
-      window.location.href = (data.role === "admin") ? "admin.html" : "portal.html";
     });
   </script>
 </body>

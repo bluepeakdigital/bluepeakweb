@@ -5,7 +5,9 @@ const adminOnly = require("../middleware/admin");
 
 const router = express.Router();
 
-// admin sees all requests
+/**
+ * ✅ Admin: see all requests
+ */
 router.get("/requests", auth, adminOnly, async (req, res) => {
   try {
     const rows = await pool.query(
@@ -16,15 +18,18 @@ router.get("/requests", auth, adminOnly, async (req, res) => {
     );
     res.json({ ok: true, requests: rows.rows });
   } catch (e) {
-    console.error(e);
+    console.error("ADMIN REQUESTS ERROR:", e);
     res.status(500).json({ ok: false, error: "Server error" });
   }
 });
 
-// admin updates request status
+/**
+ * ✅ Admin: update request status
+ */
 router.patch("/requests/:id", auth, adminOnly, async (req, res) => {
   const { status } = req.body;
   const allowed = ["new", "in_progress", "done", "rejected"];
+
   if (!allowed.includes(status)) {
     return res.status(400).json({ ok: false, error: "Invalid status" });
   }
@@ -36,25 +41,48 @@ router.patch("/requests/:id", auth, adminOnly, async (req, res) => {
     ]);
     res.json({ ok: true });
   } catch (e) {
-    console.error(e);
+    console.error("ADMIN UPDATE STATUS ERROR:", e);
     res.status(500).json({ ok: false, error: "Server error" });
   }
 });
 
-// admin reads editable site content
+/**
+ * ✅ Admin: view users (SAFE fields only)
+ * Passwords are NEVER shown. password_hash is not selected.
+ */
+router.get("/users", auth, adminOnly, async (req, res) => {
+  try {
+    const rows = await pool.query(
+      `select id, full_name, email, phone, company, role, created_at, created_via
+       from users
+       order by created_at desc`
+    );
+    res.json({ ok: true, users: rows.rows });
+  } catch (e) {
+    console.error("ADMIN USERS ERROR:", e);
+    res.status(500).json({ ok: false, error: "Server error" });
+  }
+});
+
+/**
+ * ✅ Admin: read editable site content
+ */
 router.get("/content", auth, adminOnly, async (req, res) => {
   try {
     const rows = await pool.query("select key,value from site_content");
     res.json({ ok: true, content: rows.rows });
   } catch (e) {
-    console.error(e);
+    console.error("ADMIN CONTENT GET ERROR:", e);
     res.status(500).json({ ok: false, error: "Server error" });
   }
 });
 
-// admin updates editable site content
+/**
+ * ✅ Admin: update editable site content
+ */
 router.put("/content", auth, adminOnly, async (req, res) => {
   const { key, value } = req.body;
+
   if (!key || value == null) {
     return res.status(400).json({ ok: false, error: "Missing fields" });
   }
@@ -63,12 +91,14 @@ router.put("/content", auth, adminOnly, async (req, res) => {
     await pool.query(
       `insert into site_content(key,value,updated_at)
        values($1,$2,now())
-       on conflict (key) do update set value=excluded.value, updated_at=now()`,
+       on conflict (key) do update
+       set value=excluded.value, updated_at=now()`,
       [key, String(value)]
     );
+
     res.json({ ok: true });
   } catch (e) {
-    console.error(e);
+    console.error("ADMIN CONTENT PUT ERROR:", e);
     res.status(500).json({ ok: false, error: "Server error" });
   }
 });
