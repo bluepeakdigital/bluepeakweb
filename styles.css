@@ -428,3 +428,45 @@ input:focus, select:focus, textarea:focus{
   color: rgba(234,242,255,.95);
   font-weight: 900;
 }
+
+/* Staff page */
+.staff-grid{
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+  gap: 24px;
+  margin-top: 28px;
+}
+.staff-card{
+  background: linear-gradient(180deg, rgba(255,255,255,.06), rgba(255,255,255,.02));
+  border: 1px solid rgba(255,255,255,.10);
+  border-radius: var(--radius);
+  padding: 24px;
+  box-shadow: 0 16px 50px rgba(0,0,0,.22);
+  text-align: center;
+}
+.staff-avatar{
+  width: 100px;
+  height: 100px;
+  margin: 0 auto 16px;
+  border-radius: 50%;
+  background:
+    radial-gradient(60% 60% at 30% 30%, rgba(58,160,255,.25), transparent),
+    linear-gradient(135deg, rgba(255,255,255,.08), rgba(255,255,255,.04));
+  border: 2px solid rgba(255,255,255,.12);
+}
+.staff-name{
+  margin: 0 0 6px;
+  font-size: 20px;
+}
+.staff-role{
+  margin: 0 0 12px;
+  color: var(--accent);
+  font-weight: 700;
+  font-size: 14px;
+}
+.staff-bio{
+  margin: 0;
+  color: rgba(234,242,255,.78);
+  font-size: 14px;
+  line-height: 1.5;
+}
