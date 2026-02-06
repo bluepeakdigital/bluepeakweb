@@ -61,46 +61,37 @@
       min-height: 100vh;
       display: flex;
       align-items: center;
-      justify-content: center;
-      text-align: center;
-      padding: 80px 24px 120px;
+      justify-content: flex-start;
+      padding: 80px 48px 120px;
       position: relative;
       overflow: hidden;
+      background-size: cover;
+      background-position: center right;
+      background-repeat: no-repeat;
+      background-image: url('assets/daniyal-hero.jpg');
     }
     .hero::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(90deg, var(--bg) 0%, var(--bg) 35%, transparent 70%);
+      pointer-events: none;
+    }
+    .hero::after {
       content: '';
       position: absolute;
       top: -50%;
       left: -50%;
       width: 200%;
       height: 200%;
-      background: radial-gradient(ellipse 60% 50% at 50% 0%, var(--accent-soft) 0%, transparent 50%);
-      pointer-events: none;
-    }
-    .hero::after {
-      content: '';
-      position: absolute;
-      bottom: -30%;
-      right: -30%;
-      width: 80%;
-      height: 80%;
-      background: radial-gradient(ellipse 50% 50%, var(--accent-2-soft) 0%, transparent 60%);
+      background: radial-gradient(ellipse 40% 50% at 20% 50%, var(--accent-soft) 0%, transparent 50%);
       pointer-events: none;
     }
     .hero-content {
       position: relative;
       z-index: 1;
-      max-width: 800px;
-    }
-    .hero-avatar {
-      width: 140px;
-      height: 140px;
-      margin: 0 auto 32px;
-      border-radius: 50%;
-      background: linear-gradient(135deg, var(--surface) 0%, var(--bg-elevated) 100%);
-      border: 3px solid rgba(255,107,53,0.3);
-      box-shadow: 0 0 60px var(--accent-soft);
-      animation: float 4s ease-in-out infinite;
+      max-width: 520px;
+      text-align: left;
     }
     .hero-badge {
       display: inline-block;
@@ -141,8 +132,7 @@
       font-size: 17px;
       line-height: 1.7;
       color: var(--text-muted);
-      max-width: 560px;
-      margin: 0 auto;
+      margin: 0;
       opacity: 0;
       animation: fadeUp 0.8s ease 0.6s forwards;
     }
@@ -166,24 +156,22 @@
     }
 
     .work-section {
-      padding: 0 24px 140px;
+      padding: 0 24px 80px;
       max-width: 1100px;
       margin: 0 auto;
     }
     .work-grid {
       display: grid;
-      gap: 24px;
+      grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+      gap: 20px;
     }
     .work-item {
       background: var(--surface);
-      border-radius: 24px;
-      padding: 48px 40px;
+      border-radius: 20px;
+      padding: 28px;
       border: 1px solid rgba(255,255,255,0.06);
-      display: grid;
-      grid-template-columns: 1fr 1.2fr;
-      gap: 40px;
-      align-items: center;
-      overflow: hidden;
+      cursor: pointer;
+      text-align: center;
       opacity: 0;
       transform: translateY(40px);
       transition: transform 0.6s cubic-bezier(0.16, 1, 0.3, 1), opacity 0.6s ease, border-color 0.3s, box-shadow 0.3s;
@@ -193,62 +181,176 @@
       transform: translateY(0);
     }
     .work-item:hover {
-      border-color: rgba(255,107,53,0.2);
+      border-color: rgba(255,107,53,0.3);
       box-shadow: 0 20px 60px rgba(0,0,0,0.3);
+      transform: translateY(-4px);
     }
-    .work-item:nth-child(even) {
-      grid-template-columns: 1.2fr 1fr;
-    }
-    .work-item:nth-child(even) .work-visual { order: 2; }
     .work-icon {
-      width: 72px;
-      height: 72px;
-      border-radius: 20px;
+      width: 56px;
+      height: 56px;
+      margin: 0 auto 16px;
+      border-radius: 16px;
       display: flex;
       align-items: center;
       justify-content: center;
-      font-size: 32px;
-      margin-bottom: 20px;
+      font-size: 24px;
       animation: pulse 2s ease-in-out infinite;
     }
     .work-item:nth-child(1) .work-icon { background: linear-gradient(135deg, rgba(255,107,53,0.2), rgba(247,147,30,0.15)); }
     .work-item:nth-child(2) .work-icon { background: linear-gradient(135deg, rgba(0,212,170,0.2), rgba(0,212,170,0.1)); }
     .work-item:nth-child(3) .work-icon { background: linear-gradient(135deg, rgba(88,86,214,0.2), rgba(88,86,214,0.1)); }
     .work-item:nth-child(4) .work-icon { background: linear-gradient(135deg, rgba(255,107,53,0.2), rgba(0,212,170,0.15)); }
-    .work-content h3 {
+    .work-item h3 {
       font-family: 'Syne', sans-serif;
-      font-size: 28px;
+      font-size: 18px;
       font-weight: 700;
-      margin: 0 0 12px;
+      margin: 0 0 8px;
     }
-    .work-content p {
+    .work-item p {
       color: var(--text-muted);
-      line-height: 1.6;
+      font-size: 13px;
       margin: 0;
-      font-size: 16px;
+      line-height: 1.4;
     }
-    .work-visual {
-      min-height: 180px;
-      border-radius: 16px;
-      background: linear-gradient(135deg, rgba(255,255,255,0.04) 0%, rgba(255,255,255,0.01) 100%);
-      border: 1px solid rgba(255,255,255,0.06);
+    .work-item .work-hint {
+      margin-top: 12px;
+      font-size: 11px;
+      color: var(--text-muted);
+      opacity: 0.7;
+    }
+
+    /* Popup modal */
+    .popup-overlay {
+      position: fixed;
+      inset: 0;
+      background: rgba(0,0,0,0.85);
+      backdrop-filter: blur(8px);
+      z-index: 200;
+      display: none;
+      align-items: center;
+      justify-content: center;
+      padding: 24px;
+      opacity: 0;
+      transition: opacity 0.3s ease;
+    }
+    .popup-overlay.open {
+      display: flex;
+      opacity: 1;
+    }
+    .popup-box {
+      background: var(--bg-elevated);
+      border-radius: 24px;
+      border: 1px solid rgba(255,255,255,0.08);
+      max-width: 900px;
+      width: 100%;
+      max-height: 90vh;
+      overflow: hidden;
+      display: flex;
+      flex-direction: column;
+      transform: scale(0.9);
+      transition: transform 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+    .popup-overlay.open .popup-box {
+      transform: scale(1);
+    }
+    .popup-header {
+      padding: 24px 28px;
+      border-bottom: 1px solid rgba(255,255,255,0.06);
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+    .popup-header h3 {
+      font-family: 'Syne', sans-serif;
+      font-size: 22px;
+      font-weight: 700;
+      margin: 0;
+    }
+    .popup-close {
+      width: 40px;
+      height: 40px;
+      border-radius: 12px;
+      border: 1px solid rgba(255,255,255,0.1);
+      background: rgba(255,255,255,0.05);
+      color: var(--text);
+      font-size: 20px;
+      cursor: pointer;
       display: flex;
       align-items: center;
       justify-content: center;
-      font-size: 14px;
+      transition: background 0.2s, border-color 0.2s;
+    }
+    .popup-close:hover {
+      background: rgba(255,107,53,0.2);
+      border-color: rgba(255,107,53,0.3);
+    }
+    .popup-gallery {
+      padding: 28px;
+      overflow-y: auto;
+      flex: 1;
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+      gap: 16px;
+      align-content: start;
+    }
+    .popup-gallery img {
+      width: 100%;
+      height: 180px;
+      object-fit: cover;
+      border-radius: 12px;
+      border: 1px solid rgba(255,255,255,0.06);
+    }
+
+    /* Social Media section */
+    .social-section {
+      padding: 80px 24px 100px;
+      background: var(--bg-elevated);
+    }
+    .social-section .container {
+      max-width: 900px;
+      margin: 0 auto;
+    }
+    .social-section h2 {
+      font-family: 'Syne', sans-serif;
+      font-size: clamp(28px, 4vw, 40px);
+      font-weight: 800;
+      margin: 0 0 12px;
+    }
+    .social-section .section-desc {
       color: var(--text-muted);
-      position: relative;
-      overflow: hidden;
+      font-size: 16px;
+      margin: 0 0 32px;
+      line-height: 1.6;
     }
-    .work-visual::before {
-      content: '';
-      position: absolute;
-      inset: 0;
-      background: radial-gradient(circle at 50% 50%, var(--accent-soft) 0%, transparent 70%);
-      opacity: 0;
-      transition: opacity 0.4s;
+    .social-links {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 12px;
     }
-    .work-item:hover .work-visual::before { opacity: 1; }
+    .social-link {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      padding: 14px 22px;
+      background: var(--surface);
+      border: 1px solid rgba(255,255,255,0.08);
+      border-radius: 14px;
+      color: var(--text);
+      text-decoration: none;
+      font-weight: 600;
+      font-size: 14px;
+      transition: border-color 0.2s, background 0.2s, transform 0.2s;
+    }
+    .social-link:hover {
+      border-color: rgba(255,107,53,0.3);
+      background: rgba(255,107,53,0.08);
+      transform: translateY(-2px);
+    }
+    .social-link svg {
+      width: 20px;
+      height: 20px;
+      fill: currentColor;
+    }
 
     .cta-section {
       text-align: center;
@@ -291,22 +393,19 @@
       from { opacity: 0; transform: translateY(24px); }
       to { opacity: 1; transform: translateY(0); }
     }
-    @keyframes float {
-      0%, 100% { transform: translateY(0); }
-      50% { transform: translateY(-12px); }
-    }
     @keyframes pulse {
       0%, 100% { transform: scale(1); opacity: 1; }
       50% { transform: scale(1.02); opacity: 0.9; }
     }
 
     @media (max-width: 768px) {
-      .work-item,
-      .work-item:nth-child(even) {
-        grid-template-columns: 1fr;
+      .hero {
+        padding: 80px 24px 80px;
+        background-position: 60% center;
       }
-      .work-item:nth-child(even) .work-visual { order: 0; }
-      .work-visual { min-height: 140px; }
+      .hero::before {
+        background: linear-gradient(90deg, var(--bg) 0%, var(--bg) 55%, rgba(10,10,12,0.7) 100%);
+      }
     }
   </style>
 </head>
@@ -319,7 +418,6 @@
 
   <section class="hero">
     <div class="hero-content">
-      <div class="hero-avatar"></div>
       <span class="hero-badge">Founder & CEO</span>
       <h1>Daniyal Sultan</h1>
       <p class="hero-subtitle">Graphic Designer • Developer • Creative Director</p>
@@ -338,40 +436,94 @@
 
   <section class="work-section">
     <div class="work-grid">
-      <div class="work-item">
-        <div class="work-content">
-          <div class="work-icon">📢</div>
-          <h3>Digital Ads & Campaigns</h3>
-          <p>Eye-catching social ads, banners, and paid media creatives that convert. From concept to pixel-perfect delivery.</p>
-        </div>
-        <div class="work-visual">Ad creative showcase</div>
+      <div class="work-item" data-popup="popup-ads">
+        <div class="work-icon">📢</div>
+        <h3>Digital Ads & Campaigns</h3>
+        <p>Social ads, banners, and paid media creatives.</p>
+        <span class="work-hint">Click to view gallery</span>
       </div>
 
-      <div class="work-item">
-        <div class="work-content">
-          <div class="work-icon">◆</div>
-          <h3>Logo & Brand Identity</h3>
-          <p>Memorable logos and full brand systems. Every mark tells a story and builds recognition.</p>
-        </div>
-        <div class="work-visual">Brand work</div>
+      <div class="work-item" data-popup="popup-logos">
+        <div class="work-icon">◆</div>
+        <h3>Logo & Brand Identity</h3>
+        <p>Memorable logos and full brand systems.</p>
+        <span class="work-hint">Click to view gallery</span>
       </div>
 
-      <div class="work-item">
-        <div class="work-content">
-          <div class="work-icon">{"</>"}</div>
-          <h3>Web Development</h3>
-          <p>Responsive, fast, and beautiful websites. Frontend and backend — built to perform and delight.</p>
-        </div>
-        <div class="work-visual">Web projects</div>
+      <div class="work-item" data-popup="popup-web">
+        <div class="work-icon">{"</>"}</div>
+        <h3>Web Development</h3>
+        <p>Responsive, fast, and beautiful websites.</p>
+        <span class="work-hint">Click to view gallery</span>
       </div>
 
-      <div class="work-item">
-        <div class="work-content">
-          <div class="work-icon">✨</div>
-          <h3>And More</h3>
-          <p>Illustration, UI/UX design, social content, print materials — whatever the project demands.</p>
-        </div>
-        <div class="work-visual">Full spectrum</div>
+      <div class="work-item" data-popup="popup-more">
+        <div class="work-icon">✨</div>
+        <h3>And More</h3>
+        <p>Illustration, UI/UX, social content, print.</p>
+        <span class="work-hint">Click to view gallery</span>
+      </div>
+    </div>
+  </section>
+
+  <!-- Popup: Add your ad images inside .popup-gallery as <img src="path/to/image.jpg" alt="Description" /> -->
+  <div id="popup-ads" class="popup-overlay" aria-hidden="true">
+    <div class="popup-box">
+      <div class="popup-header">
+        <h3>Digital Ads & Campaigns</h3>
+        <button class="popup-close" type="button" aria-label="Close">&times;</button>
+      </div>
+      <div class="popup-gallery">
+        <!-- Add your ad images here: <img src="assets/ads/ad1.jpg" alt="Ad 1" /> -->
+      </div>
+    </div>
+  </div>
+  <div id="popup-logos" class="popup-overlay" aria-hidden="true">
+    <div class="popup-box">
+      <div class="popup-header">
+        <h3>Logo & Brand Identity</h3>
+        <button class="popup-close" type="button" aria-label="Close">&times;</button>
+      </div>
+      <div class="popup-gallery">
+        <!-- Add your logo images here -->
+      </div>
+    </div>
+  </div>
+  <div id="popup-web" class="popup-overlay" aria-hidden="true">
+    <div class="popup-box">
+      <div class="popup-header">
+        <h3>Web Development</h3>
+        <button class="popup-close" type="button" aria-label="Close">&times;</button>
+      </div>
+      <div class="popup-gallery">
+        <!-- Add your web project images here -->
+      </div>
+    </div>
+  </div>
+  <div id="popup-more" class="popup-overlay" aria-hidden="true">
+    <div class="popup-box">
+      <div class="popup-header">
+        <h3>And More</h3>
+        <button class="popup-close" type="button" aria-label="Close">&times;</button>
+      </div>
+      <div class="popup-gallery">
+        <!-- Add more work images here -->
+      </div>
+    </div>
+  </div>
+
+  <section class="social-section">
+    <div class="container">
+      <h2>Social Media Management</h2>
+      <p class="section-desc">Managing social media presence for different companies. Follow and connect with the brands we represent.</p>
+      <div class="social-links">
+        <!-- Add links to client social profiles - duplicate blocks for each company/platform -->
+        <a href="https://instagram.com/" class="social-link" target="_blank" rel="noopener">Instagram</a>
+        <a href="https://facebook.com/" class="social-link" target="_blank" rel="noopener">Facebook</a>
+        <a href="https://twitter.com/" class="social-link" target="_blank" rel="noopener">Twitter / X</a>
+        <a href="https://linkedin.com/" class="social-link" target="_blank" rel="noopener">LinkedIn</a>
+        <a href="https://tiktok.com/" class="social-link" target="_blank" rel="noopener">TikTok</a>
+        <a href="https://youtube.com/" class="social-link" target="_blank" rel="noopener">YouTube</a>
       </div>
     </div>
   </section>
@@ -392,6 +544,39 @@
     }, { threshold: 0.15, rootMargin: '0px 0px -60px 0px' });
 
     document.querySelectorAll('.work-item').forEach(el => observer.observe(el));
+
+    // Popup logic
+    document.querySelectorAll('.work-item[data-popup]').forEach(btn => {
+      btn.addEventListener('click', () => {
+        const id = btn.getAttribute('data-popup');
+        const popup = document.getElementById(id);
+        if (popup) {
+          popup.classList.add('open');
+          popup.setAttribute('aria-hidden', 'false');
+          document.body.style.overflow = 'hidden';
+        }
+      });
+    });
+
+    document.querySelectorAll('.popup-overlay').forEach(popup => {
+      const close = () => {
+        popup.classList.remove('open');
+        popup.setAttribute('aria-hidden', 'true');
+        document.body.style.overflow = '';
+      };
+      popup.querySelector('.popup-close').addEventListener('click', close);
+      popup.addEventListener('click', (e) => { if (e.target === popup) close(); });
+    });
+
+    document.addEventListener('keydown', (e) => {
+      if (e.key === 'Escape') {
+        document.querySelectorAll('.popup-overlay.open').forEach(p => {
+          p.classList.remove('open');
+          p.setAttribute('aria-hidden', 'true');
+          document.body.style.overflow = '';
+        });
+      }
+    });
   </script>
 </body>
 </html>
