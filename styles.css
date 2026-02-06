@@ -470,3 +470,14 @@ input:focus, select:focus, textarea:focus{
   font-size: 14px;
   line-height: 1.5;
 }
+.staff-card-link{
+  text-decoration: none;
+  color: inherit;
+  display: block;
+  transition: transform .25s ease, box-shadow .25s ease, border-color .25s ease;
+}
+.staff-card-link:hover{
+  transform: translateY(-4px);
+  box-shadow: 0 24px 60px rgba(58,160,255,.15);
+  border-color: rgba(58,160,255,.25);
+}
