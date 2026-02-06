@@ -82,16 +82,13 @@
       font-weight: 800;
       margin: 0 0 16px;
       letter-spacing: -2px;
-      background: var(--gradient);
-      -webkit-background-clip: text;
-      -webkit-text-fill-color: transparent;
-      background-clip: text;
+      color: #0d0d0f;
       opacity: 0;
       animation: fadeUp 0.8s ease 0.2s forwards;
     }
     .hero-subtitle {
       font-size: 18px;
-      color: var(--text-muted);
+      color: #2d2d32;
       font-weight: 600;
       margin: 0 0 28px;
       opacity: 0;
@@ -100,26 +97,33 @@
     .hero-desc {
       font-size: 17px;
       line-height: 1.7;
-      color: var(--text-muted);
+      color: #3d3d42;
       margin: 0;
       opacity: 0;
       animation: fadeUp 0.8s ease 0.5s forwards;
     }
 
+    .work-block {
+      background-image: url('assets/work-bg.png');
+      background-size: cover;
+      background-position: center;
+      background-repeat: no-repeat;
+    }
     .section-title-block {
       text-align: center;
       padding: 100px 24px 60px;
     }
-    .section-title-block h2 {
+    .work-block .section-title-block h2 {
       font-family: 'Syne', sans-serif;
       font-size: clamp(36px, 6vw, 56px);
       font-weight: 800;
       letter-spacing: -1px;
       margin: 0 0 16px;
+      color: #0d0d0f;
     }
-    .section-title-block p {
+    .work-block .section-title-block p {
       font-size: 18px;
-      color: var(--text-muted);
+      color: #3d3d42;
       max-width: 500px;
       margin: 0 auto;
     }
@@ -134,11 +138,11 @@
       grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
       gap: 20px;
     }
-    .work-item {
-      background: var(--surface);
+    .work-block .work-item {
+      background: rgba(255,255,255,0.9);
       border-radius: 20px;
       padding: 28px;
-      border: 1px solid rgba(255,255,255,0.06);
+      border: 1px solid rgba(0,0,0,0.06);
       cursor: pointer;
       text-align: center;
       opacity: 0;
@@ -149,9 +153,9 @@
       opacity: 1;
       transform: translateY(0);
     }
-    .work-item:hover {
-      border-color: rgba(255,107,53,0.3);
-      box-shadow: 0 20px 60px rgba(0,0,0,0.3);
+    .work-block .work-item:hover {
+      border-color: rgba(255,107,53,0.5);
+      box-shadow: 0 20px 60px rgba(0,0,0,0.15);
       transform: translateY(-4px);
     }
     .work-icon {
@@ -169,23 +173,23 @@
     .work-item:nth-child(2) .work-icon { background: linear-gradient(135deg, rgba(0,212,170,0.2), rgba(0,212,170,0.1)); }
     .work-item:nth-child(3) .work-icon { background: linear-gradient(135deg, rgba(88,86,214,0.2), rgba(88,86,214,0.1)); }
     .work-item:nth-child(4) .work-icon { background: linear-gradient(135deg, rgba(255,107,53,0.2), rgba(0,212,170,0.15)); }
-    .work-item h3 {
+    .work-block .work-item h3 {
       font-family: 'Syne', sans-serif;
       font-size: 18px;
       font-weight: 700;
       margin: 0 0 8px;
+      color: #0d0d0f;
     }
-    .work-item p {
-      color: var(--text-muted);
+    .work-block .work-item p {
+      color: #3d3d42;
       font-size: 13px;
       margin: 0;
       line-height: 1.4;
     }
-    .work-item .work-hint {
+    .work-block .work-item .work-hint {
       margin-top: 12px;
       font-size: 11px;
-      color: var(--text-muted);
-      opacity: 0.7;
+      color: #5c5c63;
     }
 
     /* Popup modal */
@@ -394,6 +398,7 @@
     </div>
   </section>
 
+  <div class="work-block">
   <div class="section-title-block">
     <h2>Some of My Work</h2>
     <p>Ads, logos, websites, and everything in between — a glimpse into the craft.</p>
@@ -430,6 +435,7 @@
       </div>
     </div>
   </section>
+  </div>
 
   <!-- Popup: Add your ad images inside .popup-gallery as <img src="path/to/image.jpg" alt="Description" /> -->
   <div id="popup-ads" class="popup-overlay" aria-hidden="true">
