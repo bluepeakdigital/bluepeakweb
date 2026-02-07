@@ -273,6 +273,50 @@
       border-radius: 12px;
       border: 1px solid rgba(255,255,255,0.06);
     }
+    .popup-web-content {
+      grid-template-columns: 1fr;
+      max-width: 360px;
+    }
+    .website-card {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 8px;
+      padding: 32px 24px;
+      background: var(--surface);
+      border: 1px solid rgba(255,255,255,0.1);
+      border-radius: 16px;
+      color: var(--text);
+      text-decoration: none;
+      transition: border-color 0.2s, transform 0.2s, box-shadow 0.2s;
+    }
+    .website-card:hover {
+      border-color: rgba(255,107,53,0.4);
+      transform: translateY(-2px);
+      box-shadow: 0 12px 40px rgba(0,0,0,0.3);
+    }
+    .website-icon { font-size: 40px; }
+    .website-card strong { font-size: 18px; }
+    .website-card span:not(.website-icon):not(.website-cta) { color: var(--text-muted); font-size: 14px; }
+    .website-cta { color: var(--accent) !important; font-weight: 700; font-size: 14px !important; }
+    .popup-experiences {
+      padding: 28px;
+      overflow-y: auto;
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      gap: 20px;
+    }
+    .experience-item {
+      padding: 20px 24px;
+      background: var(--surface);
+      border: 1px solid rgba(255,255,255,0.06);
+      border-radius: 14px;
+    }
+    .exp-role { font-weight: 700; font-size: 16px; margin-bottom: 4px; }
+    .exp-company { color: var(--accent); font-size: 14px; font-weight: 600; margin-bottom: 4px; }
+    .exp-period { color: var(--text-muted); font-size: 12px; margin-bottom: 8px; }
+    .exp-desc { color: var(--text-muted); font-size: 14px; line-height: 1.5; }
 
     /* Social Media section */
     .social-section {
@@ -429,9 +473,9 @@
 
       <div class="work-item" data-popup="popup-more">
         <div class="work-icon">✨</div>
-        <h3>And More</h3>
-        <p>Illustration, UI/UX, social content, print.</p>
-        <span class="work-hint">Click to view gallery</span>
+        <h3>All My Experiences</h3>
+        <p>Roles, projects, and milestones.</p>
+        <span class="work-hint">Click to view</span>
       </div>
     </div>
   </section>
@@ -445,7 +489,12 @@
         <button class="popup-close" type="button" aria-label="Close">&times;</button>
       </div>
       <div class="popup-gallery">
-        <!-- Add your ad images here: <img src="assets/ads/ad1.jpg" alt="Ad 1" /> -->
+        <img src="assets/ads/guitar-man-poster.png" alt="The Guitar Man - Christopher Brechtefeld" />
+        <img src="assets/ads/farewell-bubbles.png" alt="Farewell Bubbles" />
+        <img src="assets/ads/fijian-drua.png" alt="Fijian Drua Rugby" />
+        <img src="assets/ads/hot-deals-vehicles.png" alt="Hot Deals - Allmake Auto Spares" />
+        <img src="assets/ads/allmake-xtrail.png" alt="Nissan X-Trail - Allmake Auto Spares" />
+        <img src="assets/ads/grill-and-chill.png" alt="Grill and Chill Combo Deals" />
       </div>
     </div>
   </div>
@@ -468,19 +517,36 @@
         <h3>Web Development</h3>
         <button class="popup-close" type="button" aria-label="Close">&times;</button>
       </div>
-      <div class="popup-gallery">
-        <!-- Add your web project images here -->
+      <div class="popup-gallery popup-web-content">
+        <a href="https://bluepeakweb.site/" target="_blank" rel="noopener" class="website-card">
+          <span class="website-icon">🌐</span>
+          <strong>BluePeak Digital</strong>
+          <span>bluepeakweb.site</span>
+          <span class="website-cta">Visit Site →</span>
+        </a>
       </div>
     </div>
   </div>
   <div id="popup-more" class="popup-overlay" aria-hidden="true">
     <div class="popup-box">
       <div class="popup-header">
-        <h3>And More</h3>
+        <h3>All My Experiences</h3>
         <button class="popup-close" type="button" aria-label="Close">&times;</button>
       </div>
-      <div class="popup-gallery">
-        <!-- Add more work images here -->
+      <div class="popup-experiences">
+        <div class="experience-item">
+          <div class="exp-role">Add your role / title</div>
+          <div class="exp-company">Company or project name</div>
+          <div class="exp-period">Period (e.g. 2022 – Present)</div>
+          <div class="exp-desc">Brief description of what you did.</div>
+        </div>
+        <div class="experience-item">
+          <div class="exp-role">Add your role / title</div>
+          <div class="exp-company">Company or project name</div>
+          <div class="exp-period">Period</div>
+          <div class="exp-desc">Brief description of what you did.</div>
+        </div>
+        <!-- Add more experience items as needed -->
       </div>
     </div>
   </div>
