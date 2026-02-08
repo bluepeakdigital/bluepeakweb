@@ -4,9 +4,11 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Daniyal Sultan — Founder & CEO | BluePeak Digital</title>
+
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=DM+Sans:wght@400;500;600;700&display=swap" rel="stylesheet" />
+
   <style>
     :root {
       --bg: #0a0a0c;
@@ -15,607 +17,262 @@
       --text: #f5f5f7;
       --text-muted: #a1a1a6;
       --accent: #ff6b35;
-      --accent-soft: rgba(255, 107, 53, 0.15);
-      --accent-2: #00d4aa;
-      --accent-2-soft: rgba(0, 212, 170, 0.12);
       --gradient: linear-gradient(135deg, #ff6b35 0%, #f7931e 50%, #00d4aa 100%);
     }
 
     * { box-sizing: border-box; }
-    html { scroll-behavior: smooth; }
-    html, body { margin: 0; padding: 0; }
-
     body {
-      font-family: 'DM Sans', -apple-system, BlinkMacSystemFont, sans-serif;
+      margin: 0;
+      font-family: 'DM Sans', sans-serif;
       background: var(--bg);
       color: var(--text);
-      overflow-x: hidden;
     }
 
+    /* NAV */
     .portfolio-nav {
       position: fixed;
-      top: 0;
-      left: 0;
-      right: 0;
-      z-index: 100;
+      top: 0; left: 0; right: 0;
       padding: 20px 40px;
       display: flex;
       justify-content: space-between;
-      align-items: center;
-      background: linear-gradient(180deg, rgba(10,10,12,0.95) 0%, transparent 100%);
-      backdrop-filter: blur(12px);
-      -webkit-backdrop-filter: blur(12px);
-      opacity: 0;
-      animation: fadeDown 0.8s ease 0.3s forwards;
+      background: rgba(10,10,12,0.9);
+      backdrop-filter: blur(10px);
+      z-index: 100;
     }
     .portfolio-nav a {
       color: var(--text-muted);
       text-decoration: none;
       font-weight: 600;
-      font-size: 14px;
-      transition: color 0.2s;
     }
     .portfolio-nav a:hover { color: var(--accent); }
 
+    /* HERO */
     .hero {
       min-height: 100vh;
       display: flex;
       align-items: center;
-      justify-content: flex-start;
-      padding: 80px 48px 120px;
-      position: relative;
-      overflow: hidden;
-      background-size: cover;
-      background-position: right center;
-      background-repeat: no-repeat;
-      background-image: url('assets/daniyal-hero.png');
+      padding: 80px 48px;
+      background: url('assets/daniyal-hero.png') no-repeat right center / cover;
     }
     .hero-content {
-      position: relative;
-      z-index: 1;
       max-width: 520px;
-      text-align: left;
+      color: #0d0d0f;
     }
     .hero h1 {
-      font-family: 'Syne', sans-serif;
-      font-size: clamp(42px, 8vw, 72px);
-      font-weight: 800;
-      margin: 0 0 16px;
-      letter-spacing: -2px;
-      color: #0d0d0f;
-      opacity: 0;
-      animation: fadeUp 0.8s ease 0.2s forwards;
+      font-family: 'Syne';
+      font-size: 64px;
+      margin-bottom: 16px;
     }
     .hero-subtitle {
       font-size: 18px;
-      color: #2d2d32;
       font-weight: 600;
-      margin: 0 0 28px;
-      opacity: 0;
-      animation: fadeUp 0.8s ease 0.35s forwards;
+      margin-bottom: 24px;
     }
     .hero-desc {
       font-size: 17px;
       line-height: 1.7;
-      color: #3d3d42;
-      margin: 0;
-      opacity: 0;
-      animation: fadeUp 0.8s ease 0.5s forwards;
     }
 
+    /* WORK */
     .work-block {
-      background-image: url('assets/work-bg.png');
-      background-size: cover;
-      background-position: center;
-      background-repeat: no-repeat;
+      background: url('assets/work-bg.png') center / cover no-repeat;
+      padding-bottom: 80px;
     }
     .section-title-block {
       text-align: center;
       padding: 100px 24px 60px;
     }
-    .work-block .section-title-block h2 {
-      font-family: 'Syne', sans-serif;
-      font-size: clamp(36px, 6vw, 56px);
-      font-weight: 800;
-      letter-spacing: -1px;
-      margin: 0 0 16px;
+    .section-title-block h2 {
+      font-family: 'Syne';
+      font-size: 48px;
       color: #0d0d0f;
     }
-    .work-block .section-title-block p {
-      font-size: 18px;
-      color: #3d3d42;
-      max-width: 500px;
-      margin: 0 auto;
-    }
 
-    .work-section {
-      padding: 0 24px 80px;
-      max-width: 1100px;
-      margin: 0 auto;
-    }
     .work-grid {
+      max-width: 1100px;
+      margin: auto;
+      padding: 0 24px;
       display: grid;
-      grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+      grid-template-columns: repeat(auto-fill, minmax(240px,1fr));
       gap: 20px;
     }
-    .work-block .work-item {
+
+    .work-item {
       background: rgba(255,255,255,0.9);
       border-radius: 20px;
       padding: 28px;
-      border: 1px solid rgba(0,0,0,0.06);
-      cursor: pointer;
       text-align: center;
-      opacity: 0;
-      transform: translateY(40px);
-      transition: transform 0.6s cubic-bezier(0.16, 1, 0.3, 1), opacity 0.6s ease, border-color 0.3s, box-shadow 0.3s;
+      cursor: pointer;
+      transition: transform .3s, box-shadow .3s;
     }
-    .work-item.visible {
-      opacity: 1;
-      transform: translateY(0);
-    }
-    .work-block .work-item:hover {
-      border-color: rgba(255,107,53,0.5);
-      box-shadow: 0 20px 60px rgba(0,0,0,0.15);
+    .work-item:hover {
       transform: translateY(-4px);
-    }
-    .work-icon {
-      width: 56px;
-      height: 56px;
-      margin: 0 auto 16px;
-      border-radius: 16px;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      font-size: 24px;
-      animation: pulse 2s ease-in-out infinite;
-    }
-    .work-item:nth-child(1) .work-icon { background: linear-gradient(135deg, rgba(255,107,53,0.2), rgba(247,147,30,0.15)); }
-    .work-item:nth-child(2) .work-icon { background: linear-gradient(135deg, rgba(0,212,170,0.2), rgba(0,212,170,0.1)); }
-    .work-item:nth-child(3) .work-icon { background: linear-gradient(135deg, rgba(88,86,214,0.2), rgba(88,86,214,0.1)); }
-    .work-item:nth-child(4) .work-icon { background: linear-gradient(135deg, rgba(255,107,53,0.2), rgba(0,212,170,0.15)); }
-    .work-block .work-item h3 {
-      font-family: 'Syne', sans-serif;
-      font-size: 18px;
-      font-weight: 700;
-      margin: 0 0 8px;
-      color: #0d0d0f;
-    }
-    .work-block .work-item p {
-      color: #3d3d42;
-      font-size: 13px;
-      margin: 0;
-      line-height: 1.4;
-    }
-    .work-block .work-item .work-hint {
-      margin-top: 12px;
-      font-size: 11px;
-      color: #5c5c63;
+      box-shadow: 0 20px 50px rgba(0,0,0,0.15);
     }
 
-    /* Popup modal */
+    /* POPUP */
     .popup-overlay {
       position: fixed;
       inset: 0;
       background: rgba(0,0,0,0.85);
-      backdrop-filter: blur(8px);
-      z-index: 200;
       display: none;
       align-items: center;
       justify-content: center;
-      padding: 24px;
-      opacity: 0;
-      transition: opacity 0.3s ease;
+      z-index: 200;
     }
-    .popup-overlay.open {
-      display: flex;
-      opacity: 1;
-    }
+    .popup-overlay.open { display: flex; }
+
     .popup-box {
       background: var(--bg-elevated);
       border-radius: 24px;
-      border: 1px solid rgba(255,255,255,0.08);
       max-width: 900px;
       width: 100%;
       max-height: 90vh;
-      overflow: hidden;
       display: flex;
       flex-direction: column;
-      transform: scale(0.9);
-      transition: transform 0.3s cubic-bezier(0.16, 1, 0.3, 1);
     }
-    .popup-overlay.open .popup-box {
-      transform: scale(1);
-    }
+
     .popup-header {
-      padding: 24px 28px;
-      border-bottom: 1px solid rgba(255,255,255,0.06);
+      padding: 24px;
       display: flex;
       justify-content: space-between;
-      align-items: center;
+      border-bottom: 1px solid rgba(255,255,255,0.08);
     }
-    .popup-header h3 {
-      font-family: 'Syne', sans-serif;
-      font-size: 22px;
-      font-weight: 700;
-      margin: 0;
-    }
+
     .popup-close {
-      width: 40px;
-      height: 40px;
-      border-radius: 12px;
-      border: 1px solid rgba(255,255,255,0.1);
-      background: rgba(255,255,255,0.05);
-      color: var(--text);
-      font-size: 20px;
+      background: none;
+      border: none;
+      color: white;
+      font-size: 28px;
       cursor: pointer;
+    }
+
+    /* SLIDER */
+    .popup-slider {
+      position: relative;
+      overflow: hidden;
+      padding: 24px;
+    }
+
+    .slider-track {
       display: flex;
-      align-items: center;
-      justify-content: center;
-      transition: background 0.2s, border-color 0.2s;
+      transition: transform 0.4s ease;
     }
-    .popup-close:hover {
-      background: rgba(255,107,53,0.2);
-      border-color: rgba(255,107,53,0.3);
-    }
-    .popup-gallery {
-      padding: 28px;
-      overflow-y: auto;
-      flex: 1;
-      display: grid;
-      grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
-      gap: 16px;
-      align-content: start;
-    }
-    .popup-gallery img {
-      width: 100%;
-      height: 180px;
-      object-fit: cover;
-      border-radius: 12px;
-      border: 1px solid rgba(255,255,255,0.06);
-    }
-    .popup-web-content {
-      grid-template-columns: 1fr;
-      max-width: 360px;
-    }
-    .website-card {
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      gap: 8px;
-      padding: 32px 24px;
-      background: var(--surface);
-      border: 1px solid rgba(255,255,255,0.1);
+
+    .slider-track img {
+      min-width: 100%;
+      height: 420px;
+      object-fit: contain;
+      background: #000;
       border-radius: 16px;
-      color: var(--text);
-      text-decoration: none;
-      transition: border-color 0.2s, transform 0.2s, box-shadow 0.2s;
-    }
-    .website-card:hover {
-      border-color: rgba(255,107,53,0.4);
-      transform: translateY(-2px);
-      box-shadow: 0 12px 40px rgba(0,0,0,0.3);
-    }
-    .website-icon { font-size: 40px; }
-    .website-card strong { font-size: 18px; }
-    .website-card span:not(.website-icon):not(.website-cta) { color: var(--text-muted); font-size: 14px; }
-    .website-cta { color: var(--accent) !important; font-weight: 700; font-size: 14px !important; }
-    .popup-experiences {
-      padding: 28px;
-      overflow-y: auto;
-      flex: 1;
-      display: flex;
-      flex-direction: column;
-      gap: 20px;
-    }
-    .experience-item {
-      padding: 20px 24px;
-      background: var(--surface);
-      border: 1px solid rgba(255,255,255,0.06);
-      border-radius: 14px;
-    }
-    .exp-role { font-weight: 700; font-size: 16px; margin-bottom: 4px; }
-    .exp-company { color: var(--accent); font-size: 14px; font-weight: 600; margin-bottom: 4px; }
-    .exp-period { color: var(--text-muted); font-size: 12px; margin-bottom: 8px; }
-    .exp-desc { color: var(--text-muted); font-size: 14px; line-height: 1.5; }
-
-    /* Social Media section */
-    .social-section {
-      padding: 80px 24px 100px;
-      background: var(--bg-elevated);
-    }
-    .social-section .container {
-      max-width: 900px;
-      margin: 0 auto;
-    }
-    .social-section h2 {
-      font-family: 'Syne', sans-serif;
-      font-size: clamp(28px, 4vw, 40px);
-      font-weight: 800;
-      margin: 0 0 12px;
-    }
-    .social-section .section-desc {
-      color: var(--text-muted);
-      font-size: 16px;
-      margin: 0 0 32px;
-      line-height: 1.6;
-    }
-    .social-links {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 12px;
-    }
-    .social-link {
-      display: inline-flex;
-      align-items: center;
-      gap: 10px;
-      padding: 14px 22px;
-      background: var(--surface);
-      border: 1px solid rgba(255,255,255,0.08);
-      border-radius: 14px;
-      color: var(--text);
-      text-decoration: none;
-      font-weight: 600;
-      font-size: 14px;
-      transition: border-color 0.2s, background 0.2s, transform 0.2s;
-    }
-    .social-link:hover {
-      border-color: rgba(255,107,53,0.3);
-      background: rgba(255,107,53,0.08);
-      transform: translateY(-2px);
-    }
-    .social-link svg {
-      width: 20px;
-      height: 20px;
-      fill: currentColor;
     }
 
-    .cta-section {
-      text-align: center;
-      padding: 100px 24px 120px;
-    }
-    .cta-section h2 {
-      font-family: 'Syne', sans-serif;
-      font-size: clamp(32px, 5vw, 48px);
-      font-weight: 800;
-      margin: 0 0 24px;
-    }
-    .cta-section p {
-      color: var(--text-muted);
-      margin: 0 0 32px;
-      font-size: 18px;
-    }
-    .cta-btn {
-      display: inline-flex;
-      align-items: center;
-      gap: 10px;
-      padding: 16px 32px;
-      background: var(--gradient);
-      color: #0a0a0c;
-      font-weight: 700;
-      font-size: 16px;
-      text-decoration: none;
-      border-radius: 14px;
-      transition: transform 0.2s, box-shadow 0.2s;
-    }
-    .cta-btn:hover {
-      transform: translateY(-2px);
-      box-shadow: 0 12px 40px rgba(255,107,53,0.35);
+    .slider-btn {
+      position: absolute;
+      top: 50%;
+      transform: translateY(-50%);
+      width: 44px;
+      height: 44px;
+      border-radius: 50%;
+      border: none;
+      background: rgba(0,0,0,0.6);
+      color: #fff;
+      font-size: 28px;
+      cursor: pointer;
     }
 
-    @keyframes fadeDown {
-      from { opacity: 0; transform: translateY(-20px); }
-      to { opacity: 1; transform: translateY(0); }
-    }
-    @keyframes fadeUp {
-      from { opacity: 0; transform: translateY(24px); }
-      to { opacity: 1; transform: translateY(0); }
-    }
-    @keyframes pulse {
-      0%, 100% { transform: scale(1); opacity: 1; }
-      50% { transform: scale(1.02); opacity: 0.9; }
-    }
+    .slider-btn.prev { left: 16px; }
+    .slider-btn.next { right: 16px; }
 
-    @media (max-width: 768px) {
-      .hero {
-        padding: 80px 24px 80px;
-        background-position: 60% center;
-      }
+    .slider-btn:hover {
+      background: var(--accent);
     }
   </style>
 </head>
+
 <body>
 
-  <nav class="portfolio-nav">
-    <a href="staff.html">← Back to Staff</a>
-    <a href="index.html">BluePeak Digital</a>
-  </nav>
+<nav class="portfolio-nav">
+  <a href="staff.html">← Back to Staff</a>
+  <a href="index.html">BluePeak Digital</a>
+</nav>
 
-  <section class="hero">
-    <div class="hero-content">
-      <h1>Daniyal Sultan</h1>
-      <p class="hero-subtitle">Graphic Designer • Developer • Creative Director</p>
-      <p class="hero-desc">
-        The mind behind BluePeak Digital — blending pixels and code to craft brands that stand out. 
-        From bold logos to full-stack solutions, every project is driven by a passion for clean design 
-        and seamless user experiences.
-      </p>
-    </div>
-  </section>
+<section class="hero">
+  <div class="hero-content">
+    <h1>Daniyal Sultan</h1>
+    <p class="hero-subtitle">Graphic Designer • Developer • Creative Director</p>
+    <p class="hero-desc">
+      The mind behind BluePeak Digital — blending pixels and code to craft brands that stand out.
+    </p>
+  </div>
+</section>
 
-  <div class="work-block">
+<section class="work-block">
   <div class="section-title-block">
     <h2>Some of My Work</h2>
-    <p>Ads, logos, websites, and everything in between — a glimpse into the craft.</p>
   </div>
 
-  <section class="work-section">
-    <div class="work-grid">
-      <div class="work-item" data-popup="popup-ads">
-        <div class="work-icon">📢</div>
-        <h3>Digital Ads & Campaigns</h3>
-        <p>Social ads, banners, and paid media creatives.</p>
-        <span class="work-hint">Click to view gallery</span>
-      </div>
-
-      <div class="work-item" data-popup="popup-logos">
-        <div class="work-icon">◆</div>
-        <h3>Logo & Brand Identity</h3>
-        <p>Memorable logos and full brand systems.</p>
-        <span class="work-hint">Click to view gallery</span>
-      </div>
-
-      <div class="work-item" data-popup="popup-web">
-        <div class="work-icon">{"</>"}</div>
-        <h3>Web Development</h3>
-        <p>Responsive, fast, and beautiful websites.</p>
-        <span class="work-hint">Click to view gallery</span>
-      </div>
-
-      <div class="work-item" data-popup="popup-more">
-        <div class="work-icon">✨</div>
-        <h3>All My Experiences</h3>
-        <p>Roles, projects, and milestones.</p>
-        <span class="work-hint">Click to view</span>
-      </div>
-    </div>
-  </section>
-  </div>
-
-  <!-- Popup: Add your ad images inside .popup-gallery as <img src="path/to/image.jpg" alt="Description" /> -->
-  <div id="popup-ads" class="popup-overlay" aria-hidden="true">
-    <div class="popup-box">
-      <div class="popup-header">
-        <h3>Digital Ads & Campaigns</h3>
-        <button class="popup-close" type="button" aria-label="Close">&times;</button>
-      </div>
-      <div class="popup-gallery">
-        <img src="assets/ads/guitar-man-poster.png" alt="The Guitar Man - Christopher Brechtefeld" />
-        <img src="assets/ads/farewell-bubbles.png" alt="Farewell Bubbles" />
-        <img src="assets/ads/fijian-drua.png" alt="Fijian Drua Rugby" />
-        <img src="assets/ads/hot-deals-vehicles.png" alt="Hot Deals - Allmake Auto Spares" />
-        <img src="assets/ads/allmake-xtrail.png" alt="Nissan X-Trail - Allmake Auto Spares" />
-        <img src="assets/ads/grill-and-chill.png" alt="Grill and Chill Combo Deals" />
-      </div>
+  <div class="work-grid">
+    <div class="work-item" data-popup="popup-ads">
+      <h3>Digital Ads & Campaigns</h3>
+      <p>Click to view</p>
     </div>
   </div>
-  <div id="popup-logos" class="popup-overlay" aria-hidden="true">
-    <div class="popup-box">
-      <div class="popup-header">
-        <h3>Logo & Brand Identity</h3>
-        <button class="popup-close" type="button" aria-label="Close">&times;</button>
+</section>
+
+<!-- ADS POPUP WITH SLIDER -->
+<div id="popup-ads" class="popup-overlay">
+  <div class="popup-box">
+    <div class="popup-header">
+      <h3>Digital Ads & Campaigns</h3>
+      <button class="popup-close">&times;</button>
+    </div>
+
+    <div class="popup-slider">
+      <button class="slider-btn prev">‹</button>
+
+      <div class="slider-track">
+        <img src="assets/ads/guitar-man-poster.png">
+        <img src="assets/ads/farewell-bubbles.png">
+        <img src="assets/ads/fijian-drua.png">
+        <img src="assets/ads/hot-deals-vehicles.png">
+        <img src="assets/ads/allmake-xtrail.png">
+        <img src="assets/ads/grill-and-chill.png">
       </div>
-      <div class="popup-gallery">
-        <img src="assets/logos/am-logo.png" alt="AM Logo" />
-        <img src="assets/logos/allmake-logo.png" alt="Allmake Auto Spares LTD" />
-        <img src="assets/logos/bluepeak-logo.png" alt="BluePeak Digital" />
-      </div>
+
+      <button class="slider-btn next">›</button>
     </div>
   </div>
-  <div id="popup-web" class="popup-overlay" aria-hidden="true">
-    <div class="popup-box">
-      <div class="popup-header">
-        <h3>Web Development</h3>
-        <button class="popup-close" type="button" aria-label="Close">&times;</button>
-      </div>
-      <div class="popup-gallery popup-web-content">
-        <a href="https://bluepeakweb.site/" target="_blank" rel="noopener" class="website-card">
-          <span class="website-icon">🌐</span>
-          <strong>BluePeak Digital</strong>
-          <span>bluepeakweb.site</span>
-          <span class="website-cta">Visit Site →</span>
-        </a>
-      </div>
-    </div>
-  </div>
-  <div id="popup-more" class="popup-overlay" aria-hidden="true">
-    <div class="popup-box">
-      <div class="popup-header">
-        <h3>All My Experiences</h3>
-        <button class="popup-close" type="button" aria-label="Close">&times;</button>
-      </div>
-      <div class="popup-experiences">
-        <div class="experience-item">
-          <div class="exp-role">Add your role / title</div>
-          <div class="exp-company">Company or project name</div>
-          <div class="exp-period">Period (e.g. 2022 – Present)</div>
-          <div class="exp-desc">Brief description of what you did.</div>
-        </div>
-        <div class="experience-item">
-          <div class="exp-role">Add your role / title</div>
-          <div class="exp-company">Company or project name</div>
-          <div class="exp-period">Period</div>
-          <div class="exp-desc">Brief description of what you did.</div>
-        </div>
-        <!-- Add more experience items as needed -->
-      </div>
-    </div>
-  </div>
+</div>
 
-  <section class="social-section">
-    <div class="container">
-      <h2>Social Media Management</h2>
-      <p class="section-desc">Managing social media presence for different companies. Follow and connect with the brands we represent.</p>
-      <div class="social-links">
-        <!-- Add links to client social profiles - duplicate blocks for each company/platform -->
-        <a href="https://instagram.com/" class="social-link" target="_blank" rel="noopener">Instagram</a>
-        <a href="https://facebook.com/" class="social-link" target="_blank" rel="noopener">Facebook</a>
-        <a href="https://twitter.com/" class="social-link" target="_blank" rel="noopener">Twitter / X</a>
-        <a href="https://linkedin.com/" class="social-link" target="_blank" rel="noopener">LinkedIn</a>
-        <a href="https://tiktok.com/" class="social-link" target="_blank" rel="noopener">TikTok</a>
-        <a href="https://youtube.com/" class="social-link" target="_blank" rel="noopener">YouTube</a>
-      </div>
-    </div>
-  </section>
+<script>
+  // Open popup
+  document.querySelector('[data-popup]').onclick = () => {
+    document.getElementById('popup-ads').classList.add('open');
+    document.body.style.overflow = 'hidden';
+  };
 
-  <section class="cta-section">
-    <h2>Let's Build Something</h2>
-    <p>Ready to bring your vision to life? Get in touch.</p>
-    <a href="index.html#contact" class="cta-btn">Get a Quote →</a>
-  </section>
+  // Close popup
+  document.querySelector('.popup-close').onclick = () => {
+    document.getElementById('popup-ads').classList.remove('open');
+    document.body.style.overflow = '';
+  };
 
-  <script>
-    const observer = new IntersectionObserver((entries) => {
-      entries.forEach((entry, i) => {
-        if (entry.isIntersecting) {
-          setTimeout(() => entry.target.classList.add('visible'), i * 120);
-        }
-      });
-    }, { threshold: 0.15, rootMargin: '0px 0px -60px 0px' });
+  // Slider logic
+  const track = document.querySelector('.slider-track');
+  const slides = track.children;
+  let index = 0;
 
-    document.querySelectorAll('.work-item').forEach(el => observer.observe(el));
+  document.querySelector('.next').onclick = () => {
+    index = (index + 1) % slides.length;
+    track.style.transform = `translateX(-${index * 100}%)`;
+  };
 
-    // Popup logic
-    document.querySelectorAll('.work-item[data-popup]').forEach(btn => {
-      btn.addEventListener('click', () => {
-        const id = btn.getAttribute('data-popup');
-        const popup = document.getElementById(id);
-        if (popup) {
-          popup.classList.add('open');
-          popup.setAttribute('aria-hidden', 'false');
-          document.body.style.overflow = 'hidden';
-        }
-      });
-    });
+  document.querySelector('.prev').onclick = () => {
+    index = (index - 1 + slides.length) % slides.length;
+    track.style.transform = `translateX(-${index * 100}%)`;
+  };
+</script>
 
-    document.querySelectorAll('.popup-overlay').forEach(popup => {
-      const close = () => {
-        popup.classList.remove('open');
-        popup.setAttribute('aria-hidden', 'true');
-        document.body.style.overflow = '';
-      };
-      popup.querySelector('.popup-close').addEventListener('click', close);
-      popup.addEventListener('click', (e) => { if (e.target === popup) close(); });
-    });
-
-    document.addEventListener('keydown', (e) => {
-      if (e.key === 'Escape') {
-        document.querySelectorAll('.popup-overlay.open').forEach(p => {
-          p.classList.remove('open');
-          p.setAttribute('aria-hidden', 'true');
-          document.body.style.overflow = '';
-        });
-      }
-    });
-  </script>
 </body>
 </html>
