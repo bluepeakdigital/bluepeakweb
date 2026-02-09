@@ -34,21 +34,21 @@
 
 
 
-    /* Slideshow for popups */
+/* Slideshow for popup galleries */
 .slideshow {
   position: relative;
   display: flex;
   justify-content: center;
   align-items: center;
   overflow: hidden;
-  min-height: 300px;
+  height: 100%; /* fill the popup box */
 }
 
 .slide-item {
   display: none;
   width: 100%;
-  max-height: 400px;
-  object-fit: contain;
+  height: 100%; /* fill popup box */
+  object-fit: cover; /* image covers the container */
   border-radius: 12px;
   transition: opacity 0.5s ease;
 }
@@ -72,8 +72,13 @@
   z-index: 10;
 }
 
-.slide-btn.prev { left: 16px; }
-.slide-btn.next { right: 16px; }
+.slide-btn.prev {
+  left: 16px;
+}
+
+.slide-btn.next {
+  right: 16px;
+}
 
 .slide-btn:hover {
   background: rgba(255,107,53,0.8);
