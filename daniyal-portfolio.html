@@ -34,55 +34,70 @@
 
 
 
-/* Slideshow for popup galleries */
+/* Popup box layout fix */
+.popup-box {
+  display: flex;
+  flex-direction: column;
+  height: 90vh;
+  max-height: 90vh;
+}
+
+/* Header stays fixed size */
+.popup-header {
+  flex-shrink: 0;
+}
+
+/* Slideshow container */
 .slideshow {
   position: relative;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  overflow: hidden;
-  height: 100%; /* fill the popup box */
-}
-
-.slide-item {
-  display: none;
+  flex: 1; /* takes remaining space ONLY */
   width: 100%;
-  height: 100%; /* fill popup box */
-  object-fit: cover; /* image covers the container */
-  border-radius: 12px;
-  transition: opacity 0.5s ease;
+  overflow: hidden;
+  background: #000;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
+/* Slides */
+.slide-item {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: contain; /* 🔥 key fix */
+  opacity: 0;
+  transition: opacity 0.4s ease;
+}
+
+/* Active slide */
 .slide-item.active {
-  display: block;
+  opacity: 1;
 }
 
+/* Arrows */
 .slide-btn {
   position: absolute;
   top: 50%;
   transform: translateY(-50%);
-  background: rgba(0,0,0,0.5);
-  color: white;
+  background: rgba(0,0,0,0.6);
+  color: #fff;
   border: none;
-  font-size: 30px;
-  padding: 8px 12px;
+  font-size: 28px;
+  padding: 12px 16px;
   cursor: pointer;
-  border-radius: 8px;
-  user-select: none;
-  z-index: 10;
+  z-index: 5;
+  border-radius: 50%;
 }
 
 .slide-btn.prev {
-  left: 16px;
+  left: 12px;
 }
 
 .slide-btn.next {
-  right: 16px;
+  right: 12px;
 }
 
-.slide-btn:hover {
-  background: rgba(255,107,53,0.8);
-}
 
     .portfolio-nav {
       position: fixed;
