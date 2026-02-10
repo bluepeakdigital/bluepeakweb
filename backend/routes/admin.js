@@ -12,11 +12,11 @@ router.get("/contacts", auth, adminOnly, async (req, res) => {
     res.status(500).json({ ok: false, error: "Server error" });
   }
 });
+
 const express = require("express");
 const pool = require("../db");
 const auth = require("../middleware/auth");
 const adminOnly = require("../middleware/admin");
-
 const router = express.Router();
 
 /**
