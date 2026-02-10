@@ -192,20 +192,20 @@
           </div>
         </div>
 
-        <form class="form" onsubmit="event.preventDefault(); alert('Form demo only — connect to Email/WhatsApp later!');">
+        <form class="form" id="contactForm">
           <label>
             Name
-            <input type="text" placeholder="Your name" required />
+            <input name="name" type="text" placeholder="Your name" required />
           </label>
 
           <label>
             Email / Phone
-            <input type="text" placeholder="example@email.com" required />
+            <input name="contact" type="text" placeholder="example@email.com" required />
           </label>
 
           <label>
             What do you need?
-            <select required>
+            <select name="service" required>
               <option value="" disabled selected>Select a service</option>
               <option>Website</option>
               <option>Logo / Branding</option>
@@ -217,11 +217,11 @@
 
           <label>
             Message
-            <textarea rows="4" placeholder="Tell us about your project..." required></textarea>
+            <textarea name="message" rows="4" placeholder="Tell us about your project..." required></textarea>
           </label>
 
           <button class="btn btn-primary" type="submit">Send Request</button>
-          <p class="form-note">Tip: Replace this form with WhatsApp, EmailJS, or a backend later.</p>
+          <p class="form-note" id="contactFormNote">Tip: This form now sends to admin panel.</p>
         </form>
       </div>
     </section>
@@ -239,5 +239,30 @@
   </footer>
 
   <script src="app.js"></script>
+  <script>
+    document.getElementById("contactForm").addEventListener("submit", async function(e) {
+      e.preventDefault();
+      const fd = new FormData(e.target);
+      const payload = Object.fromEntries(fd.entries());
+      const note = document.getElementById("contactFormNote");
+      note.textContent = "Sending...";
+      try {
+        const res = await fetch((window.BP_API_BASE || "https://bluepeakweb.onrender.com").replace(/\/$/, "") + "/public/contact", {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify(payload)
+        });
+        const data = await res.json().catch(()=>null);
+        if (!res.ok || !data?.ok) {
+          note.textContent = "Failed to send: " + (data && data.error ? data.error : "Server error");
+        } else {
+          note.textContent = "Thank you! Your request was sent.";
+          e.target.reset();
+        }
+      } catch (err) {
+        note.textContent = "Failed to send: Network error.";
+      }
+    });
+  </script>
 </body>
 </html>

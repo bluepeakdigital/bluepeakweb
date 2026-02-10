@@ -53,6 +53,27 @@
           </table>
         </div>
       </section>
+
+      <section class="panel" style="margin-top:16px;">
+        <div class="panel-top">
+          <div>
+            <h3 class="panel-title">Contact Form Submissions</h3>
+            <p class="panel-sub">Messages sent from the public website form.</p>
+          </div>
+          <button class="btn btn-ghost" id="refreshContacts" type="button">Refresh</button>
+        </div>
+        <div id="contactEmpty" class="empty">Loading...</div>
+        <div id="contactTableWrap" style="display:none; overflow:auto;">
+          <table class="admin-table">
+            <thead>
+              <tr>
+                <th>Name</th><th>Contact</th><th>Service</th><th>Message</th><th>Submitted</th>
+              </tr>
+            </thead>
+            <tbody id="contactTbody"></tbody>
+          </table>
+        </div>
+      </section>
     </div>
   </main>
 
@@ -146,11 +167,43 @@
       `).join("");
     }
 
+    async function loadContacts() {
+      const empty = document.getElementById("contactEmpty");
+      const wrap = document.getElementById("contactTableWrap");
+      const tbody = document.getElementById("contactTbody");
+      empty.style.display="block"; wrap.style.display="none";
+      empty.textContent="Loading...";
+
+      const res = await fetch(`${API}/admin/contacts`, {
+        headers: { Authorization: `Bearer ${token}` }
+      });
+      const data = await res.json().catch(()=>null);
+      if (!res.ok || !data?.ok) {
+        empty.textContent = `Failed to load contacts (${res.status})`;
+        return;
+      }
+      const contacts = data.contacts || [];
+      if (!contacts.length) { empty.textContent="No submissions."; return; }
+      empty.style.display="none";
+      wrap.style.display="block";
+      tbody.innerHTML = contacts.map(c => `
+        <tr>
+          <td>${esc(c.name)}</td>
+          <td>${esc(c.contact)}</td>
+          <td>${esc(c.service)}</td>
+          <td>${esc(c.message)}</td>
+          <td>${new Date(c.created_at).toLocaleString()}</td>
+        </tr>
+      `).join("");
+    }
+
     document.getElementById("refreshReq").onclick = loadAllRequests;
     document.getElementById("refreshUsers").onclick = loadUsers;
+    document.getElementById("refreshContacts").onclick = loadContacts;
 
     loadAllRequests();
     loadUsers();
+    loadContacts();
   </script>
 </body>
 </html>

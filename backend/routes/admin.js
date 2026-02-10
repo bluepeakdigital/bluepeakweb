@@ -1,3 +1,17 @@
+/**
+ * Admin: view contact form submissions
+ */
+router.get("/contacts", auth, adminOnly, async (req, res) => {
+  try {
+    const rows = await pool.query(
+      `SELECT * FROM contact_submissions ORDER BY created_at DESC`
+    );
+    res.json({ ok: true, contacts: rows.rows });
+  } catch (e) {
+    console.error("ADMIN CONTACTS ERROR:", e);
+    res.status(500).json({ ok: false, error: "Server error" });
+  }
+});
 const express = require("express");
 const pool = require("../db");
 const auth = require("../middleware/auth");

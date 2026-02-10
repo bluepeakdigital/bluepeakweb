@@ -6,6 +6,7 @@ const cors = require("cors");
 const authRoutes = require("./routes/auth");
 const requestRoutes = require("./routes/requests");
 const adminRoutes = require("./routes/admin");
+const publicRoutes = require("./routes/public");
 
 const app = express();
 
@@ -68,6 +69,7 @@ app.get("/", (req, res) => {
 app.use("/auth", authRoutes);
 app.use("/requests", requestRoutes);
 app.use("/admin", adminRoutes);
+app.use("/public", publicRoutes);
 
 /**
  * ✅ Start server
