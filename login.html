@@ -102,24 +102,25 @@
         btn.disabled = false;
         btn.textContent = "Login";
       }
-      // Password visibility toggle
-      document.getElementById("togglePassword").addEventListener("click", function() {
-        const input = document.getElementById("passwordInput");
-        const icon = document.getElementById("eyeIcon");
-        if (input.type === "password") {
-          input.type = "text";
-          icon.textContent = "🙈";
-        } else {
-          input.type = "password";
-          icon.textContent = "👁️";
-        }
-      });
+    });
 
-      // Forgot password placeholder
-      document.getElementById("forgotPassword").addEventListener("click", function(e) {
-        e.preventDefault();
-        alert("Password reset feature coming soon.");
-      });
+    // Password visibility toggle
+    document.getElementById("togglePassword").addEventListener("click", function() {
+      const input = document.getElementById("passwordInput");
+      const icon = document.getElementById("eyeIcon");
+      if (input.type === "password") {
+        input.type = "text";
+        icon.textContent = "🙈";
+      } else {
+        input.type = "password";
+        icon.textContent = "👁️";
+      }
+    });
+
+    // Forgot password placeholder
+    document.getElementById("forgotPassword").addEventListener("click", function(e) {
+      e.preventDefault();
+      alert("Password reset feature coming soon.");
     });
   </script>
 </body>
