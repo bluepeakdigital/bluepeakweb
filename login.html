@@ -20,15 +20,25 @@
         </label>
 
         <label>Password
-          <input name="password" type="password" required />
+          <div style="position:relative;display:flex;align-items:center;">
+            <input name="password" type="password" id="passwordInput" required style="flex:1;" />
+            <button type="button" id="togglePassword" style="position:absolute;right:8px;background:none;border:none;cursor:pointer;padding:0;">
+              <span id="eyeIcon">👁️</span>
+            </button>
+          </div>
         </label>
 
         <button class="btn btn-primary" type="submit" id="loginBtn">Login</button>
 
         <p class="form-note">
+          <a href="#" id="forgotPassword" style="color:var(--accent);font-weight:800;">Forgot password?</a>
+        </p>
+        <p class="form-note">
           No account?
           <a href="signup.html" style="color:var(--accent);font-weight:800;">Sign up</a>
         </p>
+
+        <div id="loginError" style="display:none;color:#c00;font-weight:600;margin-top:10px;"></div>
       </form>
     </div>
   </main>
@@ -68,8 +78,13 @@
         let data = {};
         try { data = JSON.parse(text); } catch {}
 
+        const errorDiv = document.getElementById("loginError");
+        errorDiv.style.display = "none";
+        errorDiv.textContent = "";
+
         if (!res.ok || !data.ok) {
-          alert(`Login failed (${res.status}) - ${data.error || text || "Unknown error"}`);
+          errorDiv.style.display = "block";
+          errorDiv.textContent = `Login failed (${res.status}) - ${data.error || text || "Unknown error"}`;
           return;
         }
 
@@ -80,11 +95,31 @@
         window.location.href = (data.role === "admin") ? "admin.html" : "portal.html";
       } catch (err) {
         console.error(err);
-        alert("Login failed - Network error (check API URL/CORS)");
+        const errorDiv = document.getElementById("loginError");
+        errorDiv.style.display = "block";
+        errorDiv.textContent = "Login failed - Network error (check API URL/CORS)";
       } finally {
         btn.disabled = false;
         btn.textContent = "Login";
       }
+      // Password visibility toggle
+      document.getElementById("togglePassword").addEventListener("click", function() {
+        const input = document.getElementById("passwordInput");
+        const icon = document.getElementById("eyeIcon");
+        if (input.type === "password") {
+          input.type = "text";
+          icon.textContent = "🙈";
+        } else {
+          input.type = "password";
+          icon.textContent = "👁️";
+        }
+      });
+
+      // Forgot password placeholder
+      document.getElementById("forgotPassword").addEventListener("click", function(e) {
+        e.preventDefault();
+        alert("Password reset feature coming soon.");
+      });
     });
   </script>
 </body>
