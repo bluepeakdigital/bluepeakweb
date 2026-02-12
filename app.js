@@ -6,6 +6,20 @@ async function loadNav() {
     const res = await fetch("nav.html");
     if (!res.ok) throw new Error("Failed to load nav.html");
     slot.innerHTML = await res.text();
+    // Show/hide nav links based on login state
+    const token = localStorage.getItem("bp_token");
+    const navLogin = document.getElementById("navLogin");
+    const navSignup = document.getElementById("navSignup");
+    const navProfile = document.getElementById("navProfile");
+    if (token) {
+      if (navLogin) navLogin.style.display = "none";
+      if (navSignup) navSignup.style.display = "none";
+      if (navProfile) navProfile.style.display = "inline-block";
+    } else {
+      if (navLogin) navLogin.style.display = "inline-block";
+      if (navSignup) navSignup.style.display = "inline-block";
+      if (navProfile) navProfile.style.display = "none";
+    }
     initNav();
   } catch (err) {
     // fallback (if opened as file://)

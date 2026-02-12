@@ -22,15 +22,26 @@
           </p>
 
           <div class="hero-actions">
-            <a class="btn btn-primary" href="#contact">Get Started</a>
+            <a class="btn btn-primary" href="#" id="getStartedBtn">Get Started</a>
             <a class="btn btn-ghost" href="#services">Learn More</a>
           </div>
 
-          <div class="hero-badges">
-            <div class="badge">Fast Turnaround</div>
-            <div class="badge">Modern Design</div>
-            <div class="badge">Results Focused</div>
+          <!-- Get Started Modal Triggered by Button -->
+          <div id="getStartedModal" style="display:none;position:fixed;z-index:1000;top:0;left:0;width:100vw;height:100vh;background:rgba(7,20,40,.55);backdrop-filter:blur(2px);align-items:center;justify-content:center;">
+            <div style="background:#fff;color:#222;border-radius:18px;box-shadow:0 8px 40px rgba(58,160,255,.13);padding:36px 32px;max-width:340px;width:90vw;display:flex;flex-direction:column;align-items:center;animation:popIn .4s cubic-bezier(.4,0,.2,1);">
+              <h3 style="margin-top:0;font-size:1.5em;">Get Started</h3>
+              <p style="color:#555;margin-bottom:18px;">Choose how you want to begin:</p>
+              <button id="modalSubmitForm" class="btn btn-primary" style="width:100%;margin-bottom:12px;">Submit a Request</button>
+              <button id="modalSignupLogin" class="btn btn-ghost" style="width:100%;">Sign Up / Login</button>
+              <button id="closeModalBtn" style="margin-top:18px;background:none;border:none;color:#3aa0ff;font-weight:700;cursor:pointer;">Cancel</button>
+            </div>
           </div>
+          <style>
+            @keyframes popIn {
+              0% { opacity:0; transform:scale(.85); }
+              100% { opacity:1; transform:scale(1); }
+            }
+          </style>
         </div>
 
         <div class="hero-art" aria-hidden="true">
@@ -240,6 +251,7 @@
 
   <script src="app.js"></script>
   <script>
+    // Contact form logic (unchanged)
     document.getElementById("contactForm").addEventListener("submit", async function(e) {
       e.preventDefault();
       const fd = new FormData(e.target);
@@ -262,6 +274,31 @@
       } catch (err) {
         note.textContent = "Failed to send: Network error.";
       }
+    });
+
+    // Get Started Modal logic
+    const getStartedBtn = document.getElementById("getStartedBtn");
+    const getStartedModal = document.getElementById("getStartedModal");
+    const closeModalBtn = document.getElementById("closeModalBtn");
+    const modalSubmitForm = document.getElementById("modalSubmitForm");
+    const modalSignupLogin = document.getElementById("modalSignupLogin");
+    getStartedBtn.addEventListener("click", function(e) {
+      e.preventDefault();
+      getStartedModal.style.display = "flex";
+    });
+    closeModalBtn.addEventListener("click", function() {
+      getStartedModal.style.display = "none";
+    });
+    getStartedModal.addEventListener("click", function(e) {
+      if (e.target === getStartedModal) getStartedModal.style.display = "none";
+    });
+    modalSubmitForm.addEventListener("click", function() {
+      getStartedModal.style.display = "none";
+      document.getElementById("contact").scrollIntoView({behavior:'smooth'});
+    });
+    modalSignupLogin.addEventListener("click", function() {
+      getStartedModal.style.display = "none";
+      window.location.href = "login.html";
     });
   </script>
 </body>
