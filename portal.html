@@ -9,23 +9,34 @@
 <body>
   <div id="nav-slot"></div>
 
-  <main class="section">
-    <div class="container" style="max-width:900px;">
-      <div class="dash-head">
+  <main class="section" style="background:#f6f8fc;color:#222;">
+    <div class="container portal-container" style="max-width:900px;">
+      <div class="dash-head" style="background:#fff;border-radius:16px;padding:18px 24px;margin-bottom:24px;box-shadow:0 2px 16px rgba(58,160,255,.08);display:flex;align-items:center;justify-content:space-between;">
         <div>
-          <h2 class="section-title" id="welcome">Welcome</h2>
-          <p class="section-lead">Submit a request and our team will contact you.</p>
+          <h2 class="section-title" id="welcome" style="color:#222;">Welcome</h2>
+          <p class="section-lead" style="color:#555;">Your customer portal — manage requests, profile, and more.</p>
         </div>
-        <button class="btn btn-ghost" id="logoutBtn" type="button">Logout</button>
+        <div class="user-dropdown" style="position:relative;">
+          <button class="btn btn-ghost" id="userMenuBtn" type="button" style="color:#222;background:#f6f8fc;border:1px solid #eaf2ff;">Account ▼</button>
+          <div id="userMenu" style="display:none;position:absolute;right:0;top:calc(100% + 4px);background:#fff;border-radius:12px;box-shadow:0 2px 16px rgba(58,160,255,.12);padding:12px 0;min-width:140px;z-index:10;">
+            <a href="#profile" class="dropdown-item" style="display:block;padding:10px 18px;color:#222;text-decoration:none;">Profile</a>
+            <button class="dropdown-item" id="logoutBtn" type="button" style="width:100%;background:none;border:none;padding:10px 18px;text-align:left;color:#c00;cursor:pointer;">Logout</button>
+          </div>
+        </div>
       </div>
 
-      <section class="panel">
-        <h3 class="panel-title">Request a Job / Service</h3>
-        <p class="panel-sub">Fill this form carefully — it goes straight to admin.</p>
+      <div class="tabs" style="display:flex;gap:12px;margin-bottom:24px;">
+        <button class="tab-btn active" data-tab="request" style="background:#fff;color:#222;border:1px solid #eaf2ff;padding:12px 24px;border-radius:12px;font-weight:700;cursor:pointer;">Submit Request</button>
+        <button class="tab-btn" data-tab="myrequests" style="background:#fff;color:#222;border:1px solid #eaf2ff;padding:12px 24px;border-radius:12px;font-weight:700;cursor:pointer;">My Requests</button>
+        <button class="tab-btn" data-tab="profile" style="background:#fff;color:#222;border:1px solid #eaf2ff;padding:12px 24px;border-radius:12px;font-weight:700;cursor:pointer;">Profile</button>
+      </div>
 
+      <section class="panel tab-panel" id="tab-request" style="background:#fff;border-radius:16px;padding:24px;box-shadow:0 2px 16px rgba(58,160,255,.08);">
+        <h3 class="panel-title" style="color:#222;">Request a Job / Service</h3>
+        <p class="panel-sub" style="color:#555;">Fill this form carefully — it goes straight to admin.</p>
         <form class="form" id="reqForm">
           <label>Service Type
-            <select name="service_type" required>
+            <select name="service_type" required style="background:#f6f8fc;color:#222;border:1px solid #eaf2ff;padding:8px 12px;border-radius:8px;">
               <option value="" disabled selected>Select</option>
               <option value="web">Web Development</option>
               <option value="design">Graphic Design</option>
@@ -33,44 +44,47 @@
               <option value="other">Other</option>
             </select>
           </label>
-
           <label>Title
-            <input name="title" type="text" required maxlength="80" placeholder="e.g., Website for my business" />
+            <input name="title" type="text" required maxlength="80" placeholder="e.g., Website for my business" style="background:#f6f8fc;color:#222;border:1px solid #eaf2ff;padding:8px 12px;border-radius:8px;" />
           </label>
-
           <label>Details
-            <textarea name="details" rows="6" required maxlength="2000"
-              placeholder="Explain what you need, pages, content, deadline, etc."></textarea>
+            <textarea name="details" rows="6" required maxlength="2000" placeholder="Explain what you need, pages, content, deadline, etc." style="background:#f6f8fc;color:#222;border:1px solid #eaf2ff;padding:8px 12px;border-radius:8px;"></textarea>
           </label>
-
           <div class="form-row">
             <label>Budget Min (optional)
-              <input name="budget_min" type="number" min="0" />
+              <input name="budget_min" type="number" min="0" style="background:#f6f8fc;color:#222;border:1px solid #eaf2ff;padding:8px 12px;border-radius:8px;" />
             </label>
             <label>Budget Max (optional)
-              <input name="budget_max" type="number" min="0" />
+              <input name="budget_max" type="number" min="0" style="background:#f6f8fc;color:#222;border:1px solid #eaf2ff;padding:8px 12px;border-radius:8px;" />
             </label>
           </div>
-
           <label>Deadline (optional)
-            <input name="deadline" type="date" />
+            <input name="deadline" type="date" style="background:#f6f8fc;color:#222;border:1px solid #eaf2ff;padding:8px 12px;border-radius:8px;" />
           </label>
-
           <button class="btn btn-primary" type="submit">Submit Request</button>
         </form>
       </section>
 
-      <section class="panel" style="margin-top:16px;">
+      <section class="panel tab-panel" id="tab-myrequests" style="background:#fff;border-radius:16px;padding:24px;box-shadow:0 2px 16px rgba(58,160,255,.08);display:none;">
         <div class="panel-top">
           <div>
-            <h3 class="panel-title">My Requests</h3>
-            <p class="panel-sub">Your submitted requests show here.</p>
+            <h3 class="panel-title" style="color:#222;">My Requests</h3>
+            <p class="panel-sub" style="color:#555;">Your submitted requests show here.</p>
           </div>
-          <button class="btn btn-ghost" id="refreshBtn" type="button">Refresh</button>
+          <button class="btn btn-ghost" id="refreshBtn" type="button" style="color:#222;background:#f6f8fc;border:1px solid #eaf2ff;">Refresh</button>
         </div>
-
         <div id="empty" class="empty">Loading...</div>
         <div id="list" class="req-list" style="display:none;"></div>
+      </section>
+
+      <section class="panel tab-panel" id="tab-profile" style="background:#fff;border-radius:16px;padding:24px;box-shadow:0 2px 16px rgba(58,160,255,.08);display:none;">
+        <h3 class="panel-title" style="color:#222;">Profile</h3>
+        <p class="panel-sub" style="color:#555;">View your account details here.</p>
+        <div id="profileInfo" style="margin-top:18px;color:#222;background:#f6f8fc;padding:18px;border-radius:12px;border:1px solid #eaf2ff;">
+          <strong>Name:</strong> <span id="profileName"></span><br>
+          <strong>Email:</strong> <span id="profileEmail"></span><br>
+          <strong>Role:</strong> <span id="profileRole"></span>
+        </div>
       </section>
     </div>
   </main>
