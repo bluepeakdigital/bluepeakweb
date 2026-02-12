@@ -48,6 +48,19 @@
   <script src="./app.js?v=11"></script>
 
   <script>
+    // Session helpers
+    window.bpGetToken = function() {
+      return localStorage.getItem("bp_token") || "";
+    };
+    window.bpGetRole = function() {
+      return localStorage.getItem("bp_role") || "";
+    };
+    window.bpSetSession = function(token, role, name) {
+      localStorage.setItem("bp_token", token);
+      localStorage.setItem("bp_role", role);
+      localStorage.setItem("bp_name", name);
+    };
+
     // If already logged in, go straight to dashboard
     const existingToken = window.bpGetToken();
     const existingRole  = window.bpGetRole();
