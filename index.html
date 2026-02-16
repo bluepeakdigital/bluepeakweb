@@ -67,7 +67,7 @@
   <!-- Nav loads here -->
   <div id="nav-slot"></div>
 
-  <!-- HERO -->
+  <!-- HERO (Elevate) -->
   <main>
     <section class="hero">
       <div class="container hero-grid">
@@ -76,51 +76,191 @@
           <p class="hero-sub">
             Web Development • Graphic Design • Digital Marketing
           </p>
-
           <div class="hero-actions">
             <a class="btn btn-primary" href="#" id="getStartedBtn">Get Started</a>
             <a class="btn btn-ghost" href="#services">Learn More</a>
           </div>
-
-          <!-- Get Started Modal Triggered by Button -->
-          <div id="getStartedModal" style="display:none;position:fixed;z-index:1000;top:0;left:0;width:100vw;height:100vh;background:rgba(7,20,40,.55);backdrop-filter:blur(2px);align-items:center;justify-content:center;">
-            <div style="background:#fff;color:#222;border-radius:18px;box-shadow:0 8px 40px rgba(58,160,255,.13);padding:36px 32px;max-width:340px;width:90vw;display:flex;flex-direction:column;align-items:center;animation:popIn .4s cubic-bezier(.4,0,.2,1);">
-              <h3 style="margin-top:0;font-size:1.5em;">Get Started</h3>
-              <p style="color:#555;margin-bottom:18px;">Choose how you want to begin:</p>
-              <button id="modalSubmitForm" class="btn btn-primary" style="width:100%;margin-bottom:12px;">Submit a Request</button>
-              <button id="modalSignupLogin" class="btn btn-ghost" style="width:100%;">Sign Up / Login</button>
-              <button id="closeModalBtn" style="margin-top:18px;background:none;border:none;color:#3aa0ff;font-weight:700;cursor:pointer;">Cancel</button>
-            </div>
-          </div>
-          <style>
-            @keyframes popIn {
-              0% { opacity:0; transform:scale(.85); }
-              100% { opacity:1; transform:scale(1); }
-            }
-          </style>
+          <!-- Modal and style unchanged ...existing code... -->
         </div>
-
         <div class="hero-art" aria-hidden="true">
-          <div class="art-card art-card-1">
-            <div class="art-top"></div>
-            <div class="art-lines">
-              <span></span><span></span><span></span><span></span>
-            </div>
-          </div>
+          <!-- ...existing code... -->
+        </div>
+      </div>
+    </section>
 
-          <div class="art-card art-card-2">
-            <div class="art-icon"></div>
-            <div class="art-bars">
-              <span></span><span></span><span></span>
-            </div>
-          </div>
+    <!-- ABOUT -->
+    <section id="about" class="section section-alt">
+      <div class="container about-grid">
+        <div>
+          <h2 class="section-title">About BluePeak Digital</h2>
+          <p class="section-lead">BluePeak helps businesses stand out online with premium websites, branding, and marketing that gets results.</p>
+          <p class="section-lead">We focus on clean design, fast delivery, and strategies that bring you more clients — not just pretty visuals.</p>
+          <ul class="ticks">
+            <li>Modern, mobile-first design</li>
+            <li>Conversion-focused approach</li>
+            <li>Ongoing support</li>
+          </ul>
+        </div>
+      </div>
+    </section>
 
-          <div class="art-card art-card-3">
-            <div class="art-icon2"></div>
-            <div class="art-pill"></div>
-            <div class="art-pill small"></div>
+    <!-- PROCESS -->
+    <section class="section">
+      <div class="container">
+        <h2 class="section-title">Our Process</h2>
+        <div class="process-grid">
+          <div class="process-step">
+            <div class="process-icon">🔍</div>
+            <div class="process-label">Discovery</div>
+          </div>
+          <div class="process-arrow">→</div>
+          <div class="process-step">
+            <div class="process-icon">🎨</div>
+            <div class="process-label">Design</div>
+          </div>
+          <div class="process-arrow">→</div>
+          <div class="process-step">
+            <div class="process-icon">💻</div>
+            <div class="process-label">Build</div>
+          </div>
+          <div class="process-arrow">→</div>
+          <div class="process-step">
+            <div class="process-icon">🚀</div>
+            <div class="process-label">Launch</div>
           </div>
         </div>
+      </div>
+    </section>
+
+    <!-- SERVICES -->
+    <section id="services" class="section">
+      <div class="container">
+        <h2 class="section-title">Services</h2>
+        <p class="section-lead">Everything you need to launch, grow, and scale online.</p>
+        <div class="cards">
+          <article class="card">
+            <div class="card-icon">💻</div>
+            <h3>Websites</h3>
+            <p>Landing Pages / Business Sites / E-commerce</p>
+            <a class="card-link" href="#contact">Request this →</a>
+          </article>
+          <article class="card">
+            <div class="card-icon">🎨</div>
+            <h3>Branding</h3>
+            <p>Logo + brand kit + colours + typography</p>
+            <a class="card-link" href="#contact">Request this →</a>
+          </article>
+          <article class="card">
+            <div class="card-icon">📱</div>
+            <h3>Social Media Design</h3>
+            <p>Post templates + banners + highlights</p>
+            <a class="card-link" href="#contact">Request this →</a>
+          </article>
+          <article class="card">
+            <div class="card-icon">📢</div>
+            <h3>Ads & Marketing</h3>
+            <p>Meta ads + creatives + strategy</p>
+            <a class="card-link" href="#contact">Request this →</a>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <!-- FEATURED WORK -->
+    <section id="portfolio" class="section">
+      <div class="container">
+        <h2 class="section-title">Featured Work</h2>
+        <p class="section-lead">A few recent projects for local businesses.</p>
+        <div class="work-grid">
+          <div class="work">
+            <div class="work-img"></div>
+            <div class="work-caption">
+              <h4>Fiji Dental Group</h4>
+              <div class="work-tags"><span class="chip">Website</span> <span class="chip">Branding</span></div>
+              <p class="work-result">Lead form + SEO setup</p>
+            </div>
+          </div>
+          <div class="work">
+            <div class="work-img alt"></div>
+            <div class="work-caption">
+              <h4>Pacific Fitness</h4>
+              <div class="work-tags"><span class="chip">Website</span> <span class="chip">Ads</span></div>
+              <p class="work-result">Bookings + Google Ads</p>
+            </div>
+          </div>
+          <div class="work">
+            <div class="work-img alt2"></div>
+            <div class="work-caption">
+              <h4>Island Eats</h4>
+              <div class="work-tags"><span class="chip">Branding</span> <span class="chip">Social Media</span></div>
+              <p class="work-result">Brand kit + Instagram templates</p>
+            </div>
+          </div>
+        </div>
+        <div style="text-align:center; margin-top:28px;">
+          <a class="btn btn-ghost" href="#">View all projects</a>
+        </div>
+      </div>
+    </section>
+
+    <!-- PACKAGES -->
+    <section class="section section-alt">
+      <div class="container">
+        <h2 class="section-title">Packages</h2>
+        <p class="section-lead">Simple plans for every stage. All include mobile-first design, SEO basics, and support.</p>
+        <div class="cards">
+          <article class="card">
+            <h3>Starter</h3>
+            <ul class="ticks">
+              <li>Up to 3 pages</li>
+              <li>2 revisions</li>
+              <li>3–5 day delivery</li>
+            </ul>
+            <div style="font-weight:800; font-size:18px; margin:10px 0 16px;">From $499</div>
+            <a class="btn btn-primary" href="#contact">Choose plan</a>
+          </article>
+          <article class="card">
+            <h3>Growth</h3>
+            <ul class="ticks">
+              <li>Up to 6 pages</li>
+              <li>4 revisions</li>
+              <li>5–7 day delivery</li>
+            </ul>
+            <div style="font-weight:800; font-size:18px; margin:10px 0 16px;">From $899</div>
+            <a class="btn btn-primary" href="#contact">Choose plan</a>
+          </article>
+          <article class="card">
+            <h3>Premium</h3>
+            <ul class="ticks">
+              <li>10+ pages</li>
+              <li>Unlimited revisions</li>
+              <li>7–12 day delivery</li>
+            </ul>
+            <div style="font-weight:800; font-size:18px; margin:10px 0 16px;">From $1499</div>
+            <a class="btn btn-primary" href="#contact">Choose plan</a>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <!-- CONTACT -->
+    <section id="contact" class="section">
+      <div class="container contact-grid">
+        <div>
+          <h2 class="section-title">Let’s build something clean.</h2>
+          <p class="section-lead">Send your details and we’ll reply with a quote and timeline.</p>
+          <div style="margin-bottom:18px;display:flex;gap:12px;flex-wrap:wrap;">
+            <a class="btn btn-ghost" href="https://wa.me/6791234567" target="_blank">WhatsApp</a>
+            <a class="btn btn-ghost" href="mailto:hello@bluepeak.com">Email</a>
+          </div>
+          <div class="contact-chips">
+            <span class="chip">Websites</span>
+            <span class="chip">Branding</span>
+            <span class="chip">Social Media</span>
+            <span class="chip">Ads</span>
+          </div>
+        </div>
+        <!-- ...existing contact form code... -->
       </div>
     </section>
 
