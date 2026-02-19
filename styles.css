@@ -1,3 +1,14 @@
+/* Animations for hero and about */
+.animate-in {
+  opacity: 1 !important;
+  transform: none !important;
+  transition: opacity .8s cubic-bezier(.4,0,.2,1), transform .8s cubic-bezier(.4,0,.2,1);
+}
+.hero, #about, #about .about-highlight, #about .section-lead, #about .ticks {
+  opacity: 0;
+  transform: translateY(40px);
+  transition: opacity .8s cubic-bezier(.4,0,.2,1), transform .8s cubic-bezier(.4,0,.2,1);
+}
 /* Testimonials Section */
 .testimonials-grid {
   display: grid;

@@ -10,6 +10,22 @@
 
   <!-- Nav loads here -->
   <div id="nav-slot"></div>
+  <script>
+    document.addEventListener('DOMContentLoaded', function() {
+      // Animate hero
+      document.querySelector('.hero').classList.add('animate-in');
+      // Animate about
+      document.querySelector('#about').classList.add('animate-in');
+      // Animate about highlights
+      document.querySelectorAll('#about .about-highlight').forEach((el, i) => {
+        setTimeout(() => el.classList.add('animate-in'), 200 + i * 120);
+      });
+      // Animate about text
+      document.querySelectorAll('#about .section-lead, #about .ticks').forEach((el, i) => {
+        setTimeout(() => el.classList.add('animate-in'), 400 + i * 100);
+      });
+    });
+  </script>
 
   <main>
     <!-- HERO (Elevate) -->
